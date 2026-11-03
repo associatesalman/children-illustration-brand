@@ -1,0 +1,98 @@
+@import "tailwindcss";
+@import "lenis/dist/lenis.css";
+
+@theme {
+  --color-ink: #161412;
+  --color-ink-soft: #4d4741;
+  --color-brand-red: #d62828;
+  --color-brand-red-dark: #b01f1f;
+  --color-sun: #ffc72c;
+  --color-paper: #f7f3ea;
+
+  --font-sans: "DM Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Fraunces", Georgia, "Times New Roman", serif;
+}
+
+@utility text-display {
+  font-family: var(--font-display);
+  font-weight: 650;
+  font-variation-settings: "SOFT" 100, "opsz" 96;
+  letter-spacing: -0.015em;
+}
+
+/* Bookmark ribbon on the service tiles. */
+.bookmark {
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 50% 72%, 0 100%);
+}
+
+/* Video buttons stay out of sight until a keyboard user tabs into them. */
+.video-controls:not(:focus-within) {
+  clip-path: inset(50%);
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+/*
+ * Media logo marquee: slow and linear, pauses on hover or keyboard focus, and
+ * becomes a static wrapped row when the visitor prefers reduced motion.
+ */
+@keyframes marquee {
+  to {
+    transform: translateX(calc(-100% / 3));
+  }
+}
+
+.marquee-track {
+  animation: marquee 60s linear infinite;
+}
+
+.marquee:hover .marquee-track,
+.marquee:focus-within .marquee-track {
+  animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track {
+    animation: none;
+    width: auto;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .marquee-clone {
+    display: none;
+  }
+}
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    @apply bg-white font-sans text-ink antialiased;
+    font-size: 1.0625rem;
+    line-height: 1.6;
+  }
+
+  /* Leave room for the sticky header when jumping to an anchor. */
+  [id] {
+    scroll-margin-top: 4.5rem;
+  }
+
+  :focus-visible {
+    outline: 3px solid var(--color-ink);
+    outline-offset: 3px;
+  }
+
+  .on-dark :focus-visible {
+    outline-color: var(--color-sun);
+  }
+
+  /* Sections receive focus after an anchor jump; the outline is not useful there. */
+  [tabindex="-1"]:focus {
+    outline: none;
+  }
+}
