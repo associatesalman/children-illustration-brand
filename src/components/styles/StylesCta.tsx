@@ -27,7 +27,7 @@ export function StylesCta() {
             <ButtonLink href="/contact">
               Discuss your illustration project <ArrowRight aria-hidden size={18} />
             </ButtonLink>
-            <ButtonLink href="/#free-sample" variant="quiet">
+            <ButtonLink href="/free-sample" variant="quiet">
               Request a free sample
             </ButtonLink>
           </div>

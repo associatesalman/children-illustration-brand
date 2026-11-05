@@ -6,10 +6,12 @@ import { useLocation, useNavigate, useNavigationType } from 'react-router'
  * Subtle smooth scrolling with Lenis. Falls back to native scrolling when the
  * visitor prefers reduced motion.
  *
- * Internal links ("/about", "/#faq", "#main") are routed here: a new page
- * opens at the top, a section link scrolls to its section (smoothly when it
- * is on the current page) and moves keyboard focus there, and Back/Forward
- * return to the position the visitor left.
+ * Internal links ("/about", "/#faq", "#main", "/coloring-studio?sheet=x") are
+ * routed here: a new page opens at the top, a section link scrolls to its
+ * section (smoothly when it is on the current page) and moves keyboard focus
+ * there, and Back/Forward return to the position the visitor left. When only
+ * the query string changes on the same page (e.g. switching coloring sheets),
+ * scroll and focus are left to that page.
  */
 export function useSmoothScroll() {
   const navigate = useNavigate()
@@ -19,6 +21,8 @@ export function useSmoothScroll() {
   const positions = useRef(new Map<string, number>())
   const currentKey = useRef<string | null>(null)
   const previousPath = useRef<string | null>(null)
+  const previousHash = useRef('')
+  const previousSearch = useRef('')
 
   useEffect(() => {
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)')
@@ -69,8 +73,8 @@ export function useSmoothScroll() {
       if (url.origin !== window.location.origin) return
 
       event.preventDefault()
-      const to = url.pathname + url.hash
-      navigate(to, { replace: to === window.location.pathname + window.location.hash })
+      const to = url.pathname + url.search + url.hash
+      navigate(to, { replace: to === window.location.pathname + window.location.search + window.location.hash })
     }
 
     document.addEventListener('click', onClick)
@@ -81,8 +85,18 @@ export function useSmoothScroll() {
   useLayoutEffect(() => {
     const samePage = previousPath.current === location.pathname
     const firstLoad = previousPath.current === null
+    const hadHash = previousHash.current !== ''
+    const searchChanged = previousSearch.current !== location.search
     previousPath.current = location.pathname
+    previousHash.current = location.hash
+    previousSearch.current = location.search
     currentKey.current = location.key
+
+    // Same page, no section link before or after: only the query string changed. The page handles it.
+    if (samePage && !firstLoad && searchChanged && !location.hash && !hadHash) {
+      lenisRef.current?.resize()
+      return
+    }
 
     const lenis = lenisRef.current
     lenis?.resize()

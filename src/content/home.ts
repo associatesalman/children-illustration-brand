@@ -13,23 +13,24 @@ export type Point = {
 
 /**
  * "Explore Children's Book Services" — transcribed from the reference screenshot in
- * Childrens Brand Replica (2).docx. Links point to the matching homepage section.
+ * Childrens Brand Replica (2).docx. Each card links to its service page where one exists; covers go to the
+ * cover collection on the Portfolio page and pricing to the pricing answer in the FAQ on this page.
  */
 export const exploreServices: (Point & { href: string })[] = [
   {
     title: 'Picture Book Illustration',
     body: "Full children's book illustrations, from character design to finished pages.",
-    href: '#illustration',
+    href: '/services/storybook-illustration',
   },
   {
     title: 'Book Cover Illustration',
     body: 'Front, back, and wraparound covers prepared for KDP or IngramSpark.',
-    href: '#portfolio',
+    href: '/portfolio#book-covers',
   },
   {
     title: 'Character Design',
     body: 'Consistent, expressive characters before the full book begins.',
-    href: '#characters',
+    href: '/services/character-design',
   },
   {
     // Reference text: "See starting prices and package options…". No prices are
@@ -41,7 +42,7 @@ export const exploreServices: (Point & { href: string })[] = [
   {
     title: 'Animation Services',
     body: 'Turn your illustrated book into short videos or animated promos.',
-    href: '#marketing',
+    href: '/services/2d-3d-animation',
   },
 ]
 
@@ -65,7 +66,7 @@ export const mediaLogos: MediaLogo[] = [
 export type Feature = Point & {
   icon: 'launch' | 'royalty' | 'readers' | 'ownership' | 'charges' | 'support'
   /**
-   * Set when the reference states a guarantee or business policy that Children Book
+   * Set when the reference states a guarantee or business policy that klutzbookpublisher
    * has not confirmed yet. The page marks these until `confirmed` is set to true.
    */
   claim?: { confirmed: boolean; note: string }

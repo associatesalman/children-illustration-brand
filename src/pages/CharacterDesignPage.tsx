@@ -11,7 +11,7 @@ import { usePageMeta } from '../lib/pageMeta'
 
 export function CharacterDesignPage() {
   usePageMeta(
-    'Character Design — Children Book',
+    'Character Design',
     "Character design for children's books: main character creation, expressions, character sheets and character development, shaped by personality, emotion, age group and your story.",
   )
 

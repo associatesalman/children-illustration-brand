@@ -1,43 +1,78 @@
 import { bookCategories, bookImage, type Book } from '../../content/books'
+import { tiltFourPerRow } from './bookTilt'
 
 /**
  * Colors per showcase; the card layout is the same everywhere.
  * - sun: white cards on a yellow section (Portfolio).
  * - white: yellow cards on a white section (Home).
+ * - red: red cards with white text on a white section (Book Publishing page only).
+ * - black: black cards with white text on a white section (Children's Book Translation page only). A faint
+ *   light edge that follows the cover's own outline keeps dark covers distinct from the black card.
  */
 const bookCardColors = {
   sun: {
     card: 'bg-white',
     pill: 'bg-sun',
     description: 'text-ink-soft',
+    cover: 'drop-shadow-[0_4px_8px_rgba(22,20,18,0.22)]',
   },
   white: {
     card: 'bg-sun',
     pill: 'bg-white',
     description: 'text-ink',
+    cover: 'drop-shadow-[0_4px_8px_rgba(22,20,18,0.22)]',
+  },
+  red: {
+    card: 'bg-brand-red text-white',
+    pill: 'bg-white text-brand-red-dark',
+    description: 'text-white/90',
+    cover: 'drop-shadow-[0_4px_8px_rgba(22,20,18,0.22)]',
+  },
+  black: {
+    card: 'bg-black text-white',
+    pill: 'bg-white text-ink',
+    description: 'text-white/85',
+    cover: 'drop-shadow-[0_0_1px_rgba(255,255,255,0.6)]',
   },
 } as const
 
 export type BookCardVariant = keyof typeof bookCardColors
 
-/**
- * On wide screens the four cards in each row are set at fixed tilts of -2°, +2°,
- * -1° and +2° with small vertical offsets. Static: no transition or hover change.
- */
-const tilt = [
-  'xl:[&:nth-child(4n+1)]:-rotate-2 xl:[&:nth-child(4n+1)]:top-3',
-  'xl:[&:nth-child(4n+2)]:rotate-2',
-  'xl:[&:nth-child(4n+3)]:-rotate-1 xl:[&:nth-child(4n+3)]:top-1',
-  'xl:[&:nth-child(4n)]:rotate-2 xl:[&:nth-child(4n)]:top-3',
-].join(' ')
+type CardLayoutProps = {
+  variant?: BookCardVariant
+  /** Tilt pattern for the grid the card sits in (four per row by default). */
+  tilt?: string
+  /** Image sizes hint for the grid the card sits in. */
+  sizes?: string
+  /** Heading level of the title, to fit the page outline. */
+  headingLevel?: 'h3' | 'h4'
+}
+
+type BookCardViewProps = CardLayoutProps & {
+  image: { src: string; srcSet?: string; width: number; height: number; alt: string }
+  label: string
+  title: string
+  /** Optional author line under the title. */
+  byline?: string
+  description: string
+}
 
 /**
  * One book in a showcase grid: a card with two small ears on top, the cover
- * centered directly on the card in a fixed 3:4 area, then the category, title
+ * centered directly on the card in a fixed 3:4 area, then the label, title
  * and description.
  */
-export function BookCard({ book, variant = 'sun' }: { book: Book; variant?: BookCardVariant }) {
-  const { src, small } = bookImage(book)
+export function BookCardView({
+  image,
+  label,
+  title,
+  byline,
+  description,
+  variant = 'sun',
+  tilt = tiltFourPerRow,
+  sizes = '(min-width: 1024px) 18vw, (min-width: 640px) 38vw, 18rem',
+  headingLevel: Heading = 'h4',
+}: BookCardViewProps) {
   const colors = bookCardColors[variant]
 
   return (
@@ -51,29 +86,49 @@ export function BookCard({ book, variant = 'sun' }: { book: Book; variant?: Book
         {/* Same area for every cover, with no backdrop; object-contain keeps each one whole and centered. */}
         <div className="relative aspect-[3/4]">
           <img
-            src={src}
-            srcSet={small ? `${small} 220w, ${src} ${book.width}w` : undefined}
-            sizes="(min-width: 1024px) 18vw, (min-width: 640px) 38vw, 18rem"
-            alt={`Cover of ${book.title}: ${book.cover}`}
-            width={book.width}
-            height={book.height}
+            src={image.src}
+            srcSet={image.srcSet}
+            sizes={image.srcSet ? sizes : undefined}
+            alt={image.alt}
+            width={image.width}
+            height={image.height}
             loading="lazy"
             decoding="async"
-            // A soft shadow that follows the cover's own edges, so light covers stay distinct from the card.
-            className="absolute inset-0 block h-full w-full object-contain p-2 drop-shadow-[0_4px_8px_rgba(22,20,18,0.22)]"
+            className={`absolute inset-0 block h-full w-full object-contain p-2 ${colors.cover}`}
           />
         </div>
 
         <div className="flex flex-1 flex-col px-3 pt-5 pb-4">
-          <p
-            className={`self-start rounded-full px-3 py-1 text-[0.7rem] font-bold tracking-[0.08em] uppercase ${colors.pill}`}
-          >
-            {bookCategories[book.category].label}
+          <p className={`self-start rounded-full px-3 py-1 text-[0.7rem] font-bold tracking-[0.08em] uppercase ${colors.pill}`}>
+            {label}
           </p>
-          <h4 className="text-display mt-3 text-[1.35rem] leading-snug">{book.title}</h4>
-          <p className={`mt-2 text-[0.95rem] leading-relaxed ${colors.description}`}>{book.description}</p>
+          <Heading className="text-display mt-3 text-[1.35rem] leading-snug">{title}</Heading>
+          {byline && <p className="mt-1 text-[0.95rem] font-bold">{byline}</p>}
+          <p className={`mt-2 text-[0.95rem] leading-relaxed ${colors.description}`}>{description}</p>
         </div>
       </div>
     </li>
+  )
+}
+
+type BookCardProps = CardLayoutProps & { book: Book }
+
+/** A Home/Portfolio/Publishing book entry, shown with its category label. */
+export function BookCard({ book, ...layout }: BookCardProps) {
+  const { src, small } = bookImage(book)
+  return (
+    <BookCardView
+      {...layout}
+      image={{
+        src,
+        srcSet: small ? `${small} 220w, ${src} ${book.width}w` : undefined,
+        width: book.width,
+        height: book.height,
+        alt: `Cover of ${book.title}: ${book.cover}`,
+      }}
+      label={bookCategories[book.category].label}
+      title={book.title}
+      description={book.description}
+    />
   )
 }

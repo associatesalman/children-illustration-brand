@@ -11,7 +11,7 @@ import { usePageMeta } from '../lib/pageMeta'
 
 export function ActivityBookIllustrationPage() {
   usePageMeta(
-    'Activity Book Illustration — Children Book',
+    'Activity Book Illustration',
     "Activity book illustration for children's books: coloring pages, illustrated puzzles such as mazes, matching and spot the difference, and educational alphabet, counting and skill-building worksheets.",
   )
 

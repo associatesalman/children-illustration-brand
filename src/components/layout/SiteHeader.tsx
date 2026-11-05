@@ -1,10 +1,10 @@
 import { ChevronDown, Menu, X } from 'lucide-react'
 import { useEffect, useId, useRef, useState } from 'react'
 import { useLocation } from 'react-router'
-import { ctaHref, isCurrentPage, primaryNav, type NavItem } from '../../content/site'
+import { brand, ctaHref, isCurrentPage, primaryNav, type NavItem } from '../../content/site'
 import { ButtonLink } from '../ui/Button'
 import { Container } from '../ui/Container'
-import { Wordmark } from '../ui/Wordmark'
+import { Logo } from '../ui/Logo'
 
 const textLinks = primaryNav.filter((item) => item.href !== ctaHref)
 const cta = primaryNav.find((item) => item.href === ctaHref)
@@ -36,8 +36,8 @@ export function SiteHeader() {
   return (
     <header className="sticky top-0 z-50 border-b border-ink/10 bg-white">
       <Container className="flex h-18 items-center justify-between gap-6">
-        <a href="/" className="shrink-0" aria-label="Children Book, home">
-          <Wordmark />
+        <a href="/" className="shrink-0" aria-label={`${brand.name}, home`}>
+          <Logo alt="" className="h-12 lg:h-14" />
         </a>
 
         <nav aria-label="Main" className="hidden lg:block">
@@ -89,6 +89,8 @@ export function SiteHeader() {
                   <ButtonLink href={item.href} className="my-3 w-full" onClick={() => setMobileOpen(false)}>
                     {item.label}
                   </ButtonLink>
+                ) : item.children ? (
+                  <p className="py-3 text-lg font-medium">{item.label}</p>
                 ) : (
                   <a
                     href={item.href}

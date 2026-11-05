@@ -3,11 +3,12 @@ import { stat } from 'node:fs/promises'
 import { createServer, type ServerResponse } from 'node:http'
 import { extname, join, normalize, resolve, sep } from 'node:path'
 import { handleContact } from './contact.ts'
+import { handleFreeSample } from './freeSample.ts'
 
 /**
  * Production server: serves the built site from dist/, falls back to
  * index.html for client-side routes (/about, /portfolio, /contact), and handles
- * POST /api/contact. Start with `npm run build && npm start`.
+ * POST /api/contact and POST /api/free-sample. Start with `npm run build && npm start`.
  */
 
 const root = resolve('dist')
@@ -39,6 +40,10 @@ const server = createServer(async (req, res) => {
   if (pathname === '/api/contact') {
     for (const [name, value] of Object.entries(baseHeaders)) res.setHeader(name, value)
     return handleContact(req, res)
+  }
+  if (pathname === '/api/free-sample') {
+    for (const [name, value] of Object.entries(baseHeaders)) res.setHeader(name, value)
+    return handleFreeSample(req, res)
   }
   if (pathname.startsWith('/api/')) return send(res, 404, 'Not found')
   if (req.method !== 'GET' && req.method !== 'HEAD') return send(res, 405, 'Method not allowed')
@@ -84,4 +89,4 @@ function send(res: ServerResponse, status: number, message: string) {
   res.end(message)
 }
 
-server.listen(port, () => console.log(`Children Book running on http://localhost:${port}`))
+server.listen(port, () => console.log(`klutzbookpublisher running on http://localhost:${port}`))

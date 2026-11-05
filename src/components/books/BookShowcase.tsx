@@ -10,7 +10,7 @@ type BookShowcaseProps = {
   title: ReactNode
   intro: string
   /** sun: yellow section, white cards (default). white: white section, yellow cards. */
-  variant?: BookCardVariant
+  variant?: Exclude<BookCardVariant, 'red' | 'black'>
 }
 
 /**

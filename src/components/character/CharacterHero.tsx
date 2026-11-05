@@ -10,7 +10,7 @@ import { Accent, Eyebrow } from '../ui/Section'
  */
 export function CharacterHero() {
   return (
-    <section aria-labelledby="character-hero-title" className="flex min-h-[calc(100svh-4.5rem)] w-full flex-col bg-sun">
+    <section aria-labelledby="character-hero-title" className="flex min-h-[calc(100svh-4.5rem)] w-full flex-col overflow-hidden bg-sun">
       <div className="mx-auto flex w-full max-w-[120rem] flex-1 flex-col px-5 pt-10 sm:px-8 sm:pt-14 lg:px-[clamp(3rem,5vw,7rem)] lg:pt-[clamp(2.5rem,6vh,5rem)]">
         <div className="grid grid-cols-1 gap-7 lg:grid-cols-12 lg:items-end lg:gap-12">
           <h1
@@ -40,17 +40,21 @@ export function CharacterHero() {
         {/* The lineup stands on the hero's bottom edge. On desktop its width follows the space left
             under the intro row, so the whole cast fits on screen without cropping anyone. */}
         <div className="mt-auto flex justify-center pt-10 lg:pt-12">
-          <img
-            src={hero.src}
-            srcSet={hero.srcSet}
-            sizes="(min-width: 1024px) min(78vw, 1394px), 100vw"
-            width={hero.width}
-            height={hero.height}
-            alt={hero.alt}
-            fetchPriority="high"
-            decoding="async"
-            className="block h-auto w-full max-w-[1394px] lg:w-[clamp(44rem,calc((100svh-4.5rem-25.5rem)*1.717),100%)]"
-          />
+          {/* Shown at most at its native 835 px so it stays sharp. The negative bottom margin (a share of
+              this wrapper's width) lets the transparent rows under the feet run past the section's
+              clipped edge, so the characters still stand on the bottom of the hero. */}
+          <div className="w-full max-w-[835px] lg:w-[clamp(44rem,calc((100svh-4.5rem-25.5rem)*1.594),100%)]">
+            <img
+              src={hero.src}
+              width={hero.width}
+              height={hero.height}
+              alt={hero.alt}
+              fetchPriority="high"
+              decoding="async"
+              className="block h-auto w-full"
+              style={{ marginBottom: `-${hero.footPadding}` }}
+            />
+          </div>
         </div>
       </div>
     </section>

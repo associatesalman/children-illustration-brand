@@ -1,4 +1,3 @@
-import aboutHero from '../assets/artwork/about-hero.svg'
 import journeyStacked from '../assets/artwork/about-journey-stacked.svg'
 import journeyWide from '../assets/artwork/about-journey-wide.svg'
 import layouts from '../assets/artwork/about-layouts.svg'
@@ -7,7 +6,6 @@ import contactScene from '../assets/artwork/contact-scene.svg'
 import characterSheet from '../assets/artwork/character-sheet.svg'
 import coverMoonFox from '../assets/artwork/cover-moon-fox.svg'
 import formats from '../assets/artwork/formats.svg'
-import heroScene from '../assets/artwork/hero-scene.svg'
 import marketing from '../assets/artwork/marketing.svg'
 import pageColoring from '../assets/artwork/page-coloring.svg'
 import pageMaze from '../assets/artwork/page-maze.svg'
@@ -33,12 +31,6 @@ export type Artwork = {
  * sources and usage notes are recorded in src/assets/artwork/ASSETS.md.
  */
 export const artwork = {
-  hero: {
-    src: heroScene,
-    alt: 'Mia flies a kite beside an open storybook while Leo the fox watches a trail of sparkles rise to a castle in the clouds',
-    width: 1600,
-    height: 1000,
-  },
   spread: { src: spreadNight, alt: 'Picture book spread: Mia and Leo look up at the moon on a starry night', width: 1600, height: 860 },
   cover: { src: coverMoonFox, alt: 'Cover illustration for a sample picture book, Mia and the Moon Fox', width: 900, height: 1200 },
   characterSheet: { src: characterSheet, alt: 'Character sheet for Mia with front, three-quarter and back views and four expressions', width: 1600, height: 1000 },
@@ -54,12 +46,6 @@ export const artwork = {
   styleComic: { src: styleComic, alt: 'Mia in a comic book style', width: 600, height: 720 },
   styleLineArt: { src: styleLineArt, alt: 'Mia as pencil line art', width: 600, height: 720 },
   styleSoft3d: { src: styleSoft3d, alt: 'Mia in a soft 3D style', width: 600, height: 720 },
-  aboutHero: {
-    src: aboutHero,
-    alt: 'Mia reads on top of a stack of books while Leo the fox looks up and manuscript pages drift around them',
-    width: 1200,
-    height: 1050,
-  },
   journeyWide: {
     src: journeyWide,
     alt: 'One picture book page in four stages: the manuscript with notes, a pencil sketch, flat color, and the finished illustration with text',

@@ -25,7 +25,7 @@ export function SampleCta() {
           <h3 className="mt-10 text-sm font-bold tracking-[0.08em] uppercase">Helpful to have ready</h3>
           <Checklist items={sampleChecklist} className="mt-4 text-lg" />
 
-          <ButtonLink href="/contact" className="mt-10">
+          <ButtonLink href="/free-sample" className="mt-10">
             Request a free sample
           </ButtonLink>
         </div>

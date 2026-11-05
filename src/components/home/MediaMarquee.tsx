@@ -14,7 +14,7 @@ export function MediaMarquee() {
           Get featured &amp; amplify <Accent>your success</Accent>
         </h2>
         <p className="mx-auto mt-4 max-w-2xl text-ink-soft">
-          Publications we can target when pitching your book in press outreach. Children Book is not affiliated with
+          Publications we can target when pitching your book in press outreach. klutzbookpublisher is not affiliated with
           these outlets, and coverage is not guaranteed.
         </p>
       </Container>

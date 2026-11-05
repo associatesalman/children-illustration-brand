@@ -303,6 +303,21 @@ export const educationalConsistency = {
   ],
 }
 
+/** Behind the scenes: the eight stages of an educational activity book, as given in the brand's reference. */
+export const educationalBehindScenes: { intro: string; steps: { title: string; body: string }[] } = {
+  intro: 'Every educational activity book moves through the same eight stages, from the first conversation to the final files, so you always know what comes next.',
+  steps: [
+    { title: 'Project Consultation', body: 'We get to know your story, your intended audience and your illustration preferences.' },
+    { title: 'Concept Drawing', body: 'We develop initial concepts and character sketches to explore the look of the book.' },
+    { title: 'Storyboarding', body: 'We plan the visual flow across the pages and keep it consistent from start to finish.' },
+    { title: 'Character Creation', body: 'We develop characters suited to your story and to your readers.' },
+    { title: 'Background', body: 'We create settings that support the characters and the activities on each page.' },
+    { title: 'Revision & Adjustment', body: 'We review the drafts with you and incorporate your feedback.' },
+    { title: 'Color & Consistency', body: 'We refine the colors and keep the visual style consistent throughout the book.' },
+    { title: 'Final Delivery', body: 'We prepare the agreed final files in the format you need for print or digital publishing.' },
+  ],
+}
+
 export const educationalOffer = {
   items: [
     'Alphabet, phonics and early reading pages',

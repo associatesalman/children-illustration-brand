@@ -1,32 +1,34 @@
-import { artwork } from '../../content/artwork'
-import { ArtImage } from '../ui/ArtImage'
+import { brand } from '../../content/site'
 import { ButtonLink } from '../ui/Button'
 import { Container } from '../ui/Container'
 import { Accent, Eyebrow } from '../ui/Section'
 
+/** Plain white hero with the copy centred; a short red rule is the only accent. No image. */
 export function AboutHero() {
   return (
-    <section aria-labelledby="about-hero-title" className="bg-white">
-      <Container className="grid grid-cols-1 items-center gap-12 py-14 sm:py-20 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.05fr)] lg:gap-16 lg:py-24">
-        <div className="max-w-xl">
-          <Eyebrow>About Children Book</Eyebrow>
-          <h1 id="about-hero-title" className="text-display text-[clamp(2.6rem,1.6rem+3.6vw,4.75rem)] leading-[1.02]">
+    <section aria-labelledby="about-hero-title" className="border-b border-ink/10 bg-white">
+      <Container className="py-20 text-center sm:py-24 lg:py-32">
+        <div className="mx-auto max-w-[54rem]">
+          <Eyebrow>About {brand.name}</Eyebrow>
+          <h1
+            id="about-hero-title"
+            className="text-display text-[clamp(2.75rem,1.5rem+4.6vw,6rem)] leading-[1] tracking-[-0.01em]"
+          >
             A creative partner for people who write <Accent>for children.</Accent>
           </h1>
-          <p className="mt-7 text-lg leading-relaxed text-ink-soft sm:text-xl">
-            Children Book is an illustration studio for children&rsquo;s authors in the United States and the United
+          <span aria-hidden className="mx-auto mt-8 block h-1 w-16 rounded-full bg-sun" />
+          <p className="mx-auto mt-8 max-w-[42rem] text-lg leading-relaxed text-ink-soft sm:text-xl">
+            {brand.name} is an illustration studio for children&rsquo;s authors in the United States and the United
             Kingdom. We draw the characters and pages at the heart of your book, then help you publish and promote it,
             so one team carries your story from manuscript to bookshelf.
           </p>
-          <div className="mt-9 flex flex-wrap items-center gap-x-7 gap-y-3">
+          <div className="mt-10 flex flex-col items-center justify-center gap-x-8 gap-y-3 sm:flex-row">
             <ButtonLink href="/contact">Discuss your story</ButtonLink>
-            <ButtonLink href="/#illustration" variant="quiet">
+            <ButtonLink href="/services/illustration-styles" variant="quiet">
               Explore illustration services
             </ButtonLink>
           </div>
         </div>
-
-        <ArtImage artwork={artwork.aboutHero} priority />
       </Container>
     </section>
   )

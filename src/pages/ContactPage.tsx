@@ -10,8 +10,8 @@ const outerRight = 'px-5 sm:px-8 lg:pl-14 lg:pr-[calc(max(0px,(100vw-90rem)/2)+3
 
 export function ContactPage() {
   usePageMeta(
-    'Contact — Children Book',
-    'Tell Children Book about your children’s book. Ask about illustration, editing, design, publishing, or marketing, and we’ll reply by email.',
+    'Contact',
+    'Tell klutzbookpublisher about your children’s book. Ask about illustration, editing, design, publishing, or marketing, and we’ll reply by email.',
   )
 
   return (

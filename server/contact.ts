@@ -1,6 +1,6 @@
 import type { IncomingMessage, ServerResponse } from 'node:http'
-import nodemailer from 'nodemailer'
 import { validateInquiry, type InquiryValues } from '../src/lib/inquiry.ts'
+import { acceptedBy, clientIp, createLogger, createRateLimiter, escapeHtml, missingEnv, type Result, sender, sendJson, SMTP_ENV, transport } from './mail.ts'
 
 /**
  * POST /api/contact: validates an inquiry and emails it to the internal
@@ -14,27 +14,22 @@ import { validateInquiry, type InquiryValues } from '../src/lib/inquiry.ts'
  * CONTACT_FROM_NAME, TRUST_PROXY ("true" behind a reverse proxy).
  */
 
-const REQUIRED_ENV = ['CONTACT_RECIPIENT_EMAIL', 'CONTACT_FROM_EMAIL', 'SMTP_HOST', 'SMTP_USER', 'SMTP_PASS'] as const
+const REQUIRED_ENV = ['CONTACT_RECIPIENT_EMAIL', ...SMTP_ENV] as const
 
 const MAX_BODY_BYTES = 16 * 1024
 const RATE_WINDOW_MS = 15 * 60 * 1000
 const RATE_MAX = 5
 const HONEYPOT_FIELD = 'website'
 
-type Result = { status: number; body: Record<string, unknown>; headers?: Record<string, string> }
+const rateLimited = createRateLimiter(RATE_MAX, RATE_WINDOW_MS)
+const log = createLogger('contact')
 
 export async function handleContact(req: IncomingMessage, res: ServerResponse) {
   const result = await processRequest(req).catch((error: unknown): Result => {
     log('unexpected error', error)
     return { status: 500, body: { ok: false, error: 'server' } }
   })
-  res.writeHead(result.status, {
-    'Content-Type': 'application/json; charset=utf-8',
-    'Cache-Control': 'no-store',
-    'X-Content-Type-Options': 'nosniff',
-    ...result.headers,
-  })
-  res.end(JSON.stringify(result.body))
+  sendJson(res, result)
 }
 
 async function processRequest(req: IncomingMessage): Promise<Result> {
@@ -68,7 +63,7 @@ async function processRequest(req: IncomingMessage): Promise<Result> {
   const { values, errors } = validateInquiry(input)
   if (Object.keys(errors).length) return { status: 422, body: { ok: false, error: 'validation', errors } }
 
-  const missing = REQUIRED_ENV.filter((name) => !process.env[name]?.trim())
+  const missing = missingEnv(REQUIRED_ENV)
   if (missing.length) {
     log(`email is not configured; missing ${missing.join(', ')}`)
     return { status: 503, body: { ok: false, error: 'unavailable' } }
@@ -77,7 +72,7 @@ async function processRequest(req: IncomingMessage): Promise<Result> {
   try {
     const recipient = process.env.CONTACT_RECIPIENT_EMAIL!.trim()
     const info = await transport().sendMail({
-      from: { name: process.env.CONTACT_FROM_NAME?.trim() || 'Children Book Website', address: process.env.CONTACT_FROM_EMAIL!.trim() },
+      from: sender(),
       to: recipient,
       replyTo: { name: values.fullName, address: values.email },
       subject: `New inquiry: ${values.mainService} from ${values.fullName}`,
@@ -85,10 +80,7 @@ async function processRequest(req: IncomingMessage): Promise<Result> {
       html: emailHtml(values),
     })
     // Success only when the provider accepted the message for our recipient.
-    const accepted = info.accepted.map((entry: string | { address: string }) =>
-      (typeof entry === 'string' ? entry : entry.address).toLowerCase(),
-    )
-    if (!accepted.includes(recipient.toLowerCase()) || info.rejected.length) {
+    if (!acceptedBy(info, recipient)) {
       log('provider did not accept the message')
       return { status: 502, body: { ok: false, error: 'delivery' } }
     }
@@ -113,7 +105,7 @@ const rows = (v: InquiryValues): [string, string][] => [
 
 function emailText(v: InquiryValues) {
   return [
-    'New inquiry from the Children Book contact page',
+    'New inquiry from the klutzbookpublisher contact page',
     '',
     ...rows(v).map(([label, value]) => `${label}: ${value}`),
     '',
@@ -131,40 +123,12 @@ function emailHtml(v: InquiryValues) {
     .map(([label, value]) => `<tr><th style="${cell};width:160px;color:#4d4741">${escapeHtml(label)}</th><td style="${cell}">${escapeHtml(value)}</td></tr>`)
     .join('')
   return `<div style="font-family:Arial,Helvetica,sans-serif;font-size:15px;color:#161412;max-width:640px">
-<h1 style="font-size:20px;margin:0 0 16px">New inquiry from the Children Book contact page</h1>
+<h1 style="font-size:20px;margin:0 0 16px">New inquiry from the klutzbookpublisher contact page</h1>
 <table style="border-collapse:collapse;width:100%">${table}</table>
 <h2 style="font-size:16px;margin:24px 0 8px">Project details</h2>
 <p style="white-space:pre-wrap;margin:0;line-height:1.5">${escapeHtml(v.details)}</p>
 <p style="margin:24px 0 0;color:#4d4741;font-size:13px">Submitted ${escapeHtml(new Date().toUTCString())}. Reply to this email to answer the visitor directly.</p>
 </div>`
-}
-
-function escapeHtml(value: string) {
-  return value.replace(/[&<>"']/g, (char) => `&#${char.charCodeAt(0)};`)
-}
-
-let cached: { key: string; transporter: ReturnType<typeof nodemailer.createTransport> } | null = null
-
-function transport() {
-  const env = process.env
-  const port = Number(env.SMTP_PORT) || 587
-  const secure = env.SMTP_SECURE ? env.SMTP_SECURE === 'true' : port === 465
-  const key = [env.SMTP_HOST, port, secure, env.SMTP_USER, env.SMTP_PASS].join('|')
-  if (cached?.key !== key) {
-    cached = {
-      key,
-      transporter: nodemailer.createTransport({
-        host: env.SMTP_HOST,
-        port,
-        secure,
-        auth: { user: env.SMTP_USER!, pass: env.SMTP_PASS! },
-        connectionTimeout: 10_000,
-        greetingTimeout: 10_000,
-        socketTimeout: 20_000,
-      }),
-    }
-  }
-  return cached.transporter
 }
 
 // ------------------------------------------------------------------ request helpers
@@ -184,35 +148,3 @@ function readBody(req: IncomingMessage): Promise<string | null> {
   })
 }
 
-function clientIp(req: IncomingMessage) {
-  if (process.env.TRUST_PROXY === 'true') {
-    const forwarded = String(req.headers['x-forwarded-for'] ?? '').split(',')[0].trim()
-    if (forwarded) return forwarded
-  }
-  return req.socket.remoteAddress ?? 'unknown'
-}
-
-const attempts = new Map<string, number[]>()
-
-/** Returns seconds to wait when the address is over the limit, otherwise records the attempt and returns 0. */
-function rateLimited(ip: string) {
-  const now = Date.now()
-  const recent = (attempts.get(ip) ?? []).filter((time) => now - time < RATE_WINDOW_MS)
-  if (recent.length >= RATE_MAX) {
-    attempts.set(ip, recent)
-    return Math.ceil((recent[0] + RATE_WINDOW_MS - now) / 1000)
-  }
-  recent.push(now)
-  attempts.set(ip, recent)
-  if (attempts.size > 5000) {
-    for (const [key, times] of attempts) if (times.every((time) => now - time >= RATE_WINDOW_MS)) attempts.delete(key)
-  }
-  return 0
-}
-
-/** Logs without personal data or secrets: only an error's code, never its message or the addresses involved. */
-function log(message: string, error?: unknown) {
-  const detail = error && typeof error === 'object' ? (error as { code?: string; responseCode?: number }) : null
-  const suffix = detail ? ` (${[detail.code, detail.responseCode].filter(Boolean).join(' ') || 'no code'})` : ''
-  console.warn(`[contact] ${message}${suffix}`)
-}

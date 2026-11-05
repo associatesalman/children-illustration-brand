@@ -96,3 +96,103 @@
     outline: none;
   }
 }
+
+/* ------------------------------------------------------------------ Coloring Studio */
+
+/* Pointer shape for each tool on the drawing; the brush tools also show a size circle (see Painter). */
+.coloring-stage {
+  cursor: pointer;
+}
+.coloring-stage[data-tool="marker"],
+.coloring-stage[data-tool="eraser"],
+.coloring-stage[data-tool="picker"] {
+  cursor: crosshair;
+}
+.coloring-stage[data-tool="move"] {
+  cursor: grab;
+}
+.coloring-stage[data-panning="true"] {
+  cursor: grabbing;
+}
+
+/* Brush size slider: a plain, thick track that's easy to grab with a finger. */
+.coloring-range {
+  appearance: none;
+  background: transparent;
+  accent-color: var(--color-ink);
+}
+.coloring-range::-webkit-slider-runnable-track {
+  height: 0.5rem;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--color-ink) 18%, white);
+}
+.coloring-range::-moz-range-track {
+  height: 0.5rem;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--color-ink) 18%, white);
+}
+.coloring-range::-webkit-slider-thumb {
+  appearance: none;
+  width: 1.5rem;
+  height: 1.5rem;
+  margin-top: -0.5rem;
+  border-radius: 999px;
+  background: var(--color-sun);
+  border: 2px solid var(--color-ink);
+}
+.coloring-range::-moz-range-thumb {
+  width: 1.25rem;
+  height: 1.25rem;
+  border-radius: 999px;
+  background: var(--color-sun);
+  border: 2px solid var(--color-ink);
+}
+
+/*
+ * Printing a sheet (see lib/coloring/output.ts): only the prepared image is printed, centred and scaled to fit the
+ * page with a 12 mm margin, without distortion. The page margin itself is zero so browsers have no room for their
+ * own header and footer lines. Ordinary printing of the site is unaffected unless a sheet print is in progress.
+ */
+.coloring-print {
+  display: none;
+}
+
+@media print {
+  html.printing-coloring body > :not(.coloring-print) {
+    display: none !important;
+  }
+
+  html.printing-coloring,
+  html.printing-coloring body {
+    margin: 0 !important;
+    padding: 0 !important;
+    background: #ffffff !important;
+    height: auto !important;
+  }
+
+  html.printing-coloring .coloring-print {
+    display: flex !important;
+    box-sizing: border-box;
+    width: 100%;
+    height: 100vh;
+    padding: 12mm;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    break-inside: avoid;
+  }
+
+  html.printing-coloring .coloring-print img {
+    display: block;
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+  }
+
+  @page {
+    size: auto;
+    margin: 0;
+  }
+}

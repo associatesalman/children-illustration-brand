@@ -19,7 +19,7 @@ const styles = [
   {
     name: 'Realistic, 3D/detailed and comic book',
     body: 'Also part of our illustration services. A free sample is the best way to see one of these styles applied to your own story.',
-    href: '/#free-sample',
+    href: '/free-sample',
     link: 'Ask for a free sample',
   },
 ]

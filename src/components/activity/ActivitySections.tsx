@@ -6,6 +6,7 @@ import {
   coloringTheme,
   coloringTopics,
   educational,
+  educationalBehindScenes,
   educationalConsistency,
   educationalMedia,
   educationalOffer,
@@ -161,6 +162,27 @@ export function EducationalSection() {
             <p className="mt-2 leading-relaxed text-ink-soft">{item.body}</p>
           </div>
         ))}
+      </div>
+
+      {/* Behind the scenes: the eight stages as a ruled, numbered sequence on a yellow panel. */}
+      <div className="mt-16 rounded-lg bg-sun p-7 sm:p-10 lg:mt-24 lg:p-14">
+        <div className="grid grid-cols-1 gap-5 lg:grid-cols-12 lg:items-end lg:gap-16">
+          <h3 className="text-display text-[clamp(1.9rem,1.4rem+1.8vw,3rem)] leading-[1.05] lg:col-span-5">
+            Behind <Accent>the scenes</Accent>
+          </h3>
+          <p className="max-w-2xl text-lg leading-relaxed lg:col-span-7">{educationalBehindScenes.intro}</p>
+        </div>
+        <ol className="mt-10 grid grid-cols-1 gap-x-10 gap-y-9 sm:grid-cols-2 lg:mt-12 xl:grid-cols-4">
+          {educationalBehindScenes.steps.map((step, index) => (
+            <li key={step.title} className="border-t-2 border-ink pt-5">
+              <span className="text-display block text-3xl leading-none text-brand-red-dark">
+                {String(index + 1).padStart(2, '0')}
+              </span>
+              <h4 className="mt-3 text-lg font-bold">{step.title}</h4>
+              <p className="mt-1.5 leading-relaxed">{step.body}</p>
+            </li>
+          ))}
+        </ol>
       </div>
 
       <OfferRow {...educationalOffer} panel="ink" className="mt-16 lg:mt-24" />

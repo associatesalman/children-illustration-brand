@@ -19,7 +19,7 @@ export function AboutCta() {
         />
         <div className="mt-9 flex flex-wrap items-center justify-center gap-x-7 gap-y-3">
           <ButtonLink href="/contact">Discuss your story</ButtonLink>
-          <ButtonLink href="/#illustration" variant="quiet">
+          <ButtonLink href="/services/illustration-styles" variant="quiet">
             Explore illustration services
           </ButtonLink>
         </div>

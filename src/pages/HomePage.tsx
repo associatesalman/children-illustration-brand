@@ -11,6 +11,7 @@ import { Process } from '../components/home/Process'
 import { Publishing } from '../components/home/Publishing'
 import { SampleCta } from '../components/home/SampleCta'
 import { StylesGallery } from '../components/home/StylesGallery'
+import { Vision } from '../components/home/Vision'
 import { WhyUs } from '../components/home/WhyUs'
 import { Accent } from '../components/ui/Section'
 import { brand } from '../content/site'
@@ -18,13 +19,15 @@ import { usePageMeta } from '../lib/pageMeta'
 
 export function HomePage() {
   usePageMeta(
-    "Children Book — Children's Book Illustration, Publishing & Marketing",
+    `${brand.name} | Children's Book Illustration, Publishing & Marketing`,
     `${brand.name} illustrates children's books for authors in the US and UK, with publishing and marketing support from one team.`,
+    { exactTitle: true },
   )
 
   return (
     <>
       <Hero />
+      <Vision />
       <MediaMarquee />
       <BookShowcase
         id="portfolio"

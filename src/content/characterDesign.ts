@@ -12,8 +12,7 @@ import sketches1200 from '../assets/character-design/expression-sketches-1200.we
 import sketches640 from '../assets/character-design/expression-sketches-640.webp'
 import expressions3d from '../assets/character-design/expressions-3d.mp4'
 import expressions3dPoster from '../assets/character-design/expressions-3d-poster-736.webp'
-import hero1394 from '../assets/character-design/hero-lineup-1394.webp'
-import hero697 from '../assets/character-design/hero-lineup-697.webp'
+import heroMockup from '../assets/character-design/hero-mockup-835.webp'
 import ellis1200 from '../assets/character-design/sheet-ellis-1200.webp'
 import ellis640 from '../assets/character-design/sheet-ellis-640.webp'
 import turnaround1200 from '../assets/character-design/sheet-turnaround-1200.webp'
@@ -31,12 +30,14 @@ import type { StyleImage, StyleVideoAsset } from './illustrationStyles'
 
 const set = (...pairs: [string, number][]) => pairs.map(([src, w]) => `${src} ${w}w`).join(', ')
 
+/** Supplied background-removed lineup (`public/character design/hero-mokcup.png`), pixel-identical lossless WebP. */
 export const hero = {
-  src: hero1394,
-  srcSet: set([hero697, 697], [hero1394, 1394]),
-  width: 1394,
-  height: 812,
-  alt: 'Six flat-color characters standing side by side: a woman in a green blouse with arms crossed beside a sitting dog, a man in a cap and polo waving and holding a toolbox, a young woman hugging a clipboard, a man in a green sweatshirt with hands in his pockets, and a woman in a red top mid-step.',
+  src: heroMockup,
+  width: 835,
+  height: 585,
+  /** Transparent rows under the characters' feet, as a share of the image width (61 px of 835). */
+  footPadding: '7.3%',
+  alt: 'Five flat-color characters and a dog standing side by side: a woman in a green blouse with arms crossed beside a sitting dog, a man in a cap and polo waving and holding a toolbox, a young woman hugging a clipboard, a man in a green sweatshirt with hands in his pockets, and a woman in a red top mid-step.',
 }
 
 export type SectionCopy = {
