@@ -124,8 +124,8 @@ export function InquiryForm() {
           <input {...field('country')} type="text" autoComplete="country-name" className={inputClass} />
         </Field>
 
-        <Field {...sharedProps} name="mainService" label="Main service">
-          <Select {...field('mainService')} required aria-required>
+        <Field {...sharedProps} name="mainService" label="Main service" optional>
+          <Select {...field('mainService')}>
             <option value="">Choose a service</option>
             {mainServices.map((service) => (
               <option key={service}>{service}</option>
@@ -150,8 +150,8 @@ export function InquiryForm() {
           </Select>
         </Field>
 
-        <Field {...sharedProps} name="details" label="Project details" wide>
-          <textarea {...field('details')} required aria-required rows={6} className={`${inputClass} min-h-40 resize-y`} />
+        <Field {...sharedProps} name="details" label="Project details" optional wide>
+          <textarea {...field('details')} rows={6} className={`${inputClass} min-h-40 resize-y`} />
         </Field>
 
         {/* Honeypot: hidden from people and assistive technology; bots that fill it are ignored. */}

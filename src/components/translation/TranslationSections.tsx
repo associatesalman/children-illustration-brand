@@ -188,10 +188,11 @@ export function CollectionSection({ collection, first }: { collection: BookColle
   )
 }
 
+/** Collections with no books are left out until they have some. */
 export function BookCollections() {
   return (
     <>
-      {collections.map((collection, index) => (
+      {collections.filter((collection) => collection.books.length > 0).map((collection, index) => (
         <CollectionSection key={collection.id} collection={collection} first={index === 0} />
       ))}
     </>

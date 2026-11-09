@@ -1,4 +1,18 @@
 import advertising480 from '../assets/marketing/advertising-types-480.webp'
+import ecosystemPoster from '../assets/marketing/amazon-ecosystem-poster.webp'
+import ecosystem from '../assets/marketing/amazon-ecosystem.mp4'
+import amazonBoard480 from '../assets/marketing/amazon-marketing-board-480.webp'
+import amazonBoard735 from '../assets/marketing/amazon-marketing-board-735.webp'
+import aplus1x640 from '../assets/marketing/aplus-01-process-640.webp'
+import aplus1x970 from '../assets/marketing/aplus-01-process-970.webp'
+import aplus2x640 from '../assets/marketing/aplus-02-inside-pages-640.webp'
+import aplus2x970 from '../assets/marketing/aplus-02-inside-pages-970.webp'
+import aplus3x640 from '../assets/marketing/aplus-03-series-640.webp'
+import aplus3x970 from '../assets/marketing/aplus-03-series-970.webp'
+import aplus4x640 from '../assets/marketing/aplus-04-lesson-preview-640.webp'
+import aplus4x970 from '../assets/marketing/aplus-04-lesson-preview-970.webp'
+import aplus5x640 from '../assets/marketing/aplus-05-contents-640.webp'
+import aplus5x970 from '../assets/marketing/aplus-05-contents-970.webp'
 import advertising735 from '../assets/marketing/advertising-types-735.webp'
 import brandBoard480 from '../assets/marketing/brand-identity-board-480.webp'
 import brandBoard736 from '../assets/marketing/brand-identity-board-736.webp'
@@ -6,8 +20,6 @@ import brandReelPoster from '../assets/marketing/brand-website-reel-poster.webp'
 import brandReel from '../assets/marketing/brand-website-reel.mp4'
 import toolkitPoster from '../assets/marketing/content-toolkit-poster.webp'
 import toolkit from '../assets/marketing/content-toolkit.mp4'
-import coverReelPoster from '../assets/marketing/cover-design-reel-poster.webp'
-import coverReel from '../assets/marketing/cover-design-reel.mp4'
 import webPage480 from '../assets/marketing/illustrated-web-page-480.webp'
 import webPage736 from '../assets/marketing/illustrated-web-page-736.webp'
 import story480 from '../assets/marketing/market-your-story-480.webp'
@@ -85,13 +97,6 @@ export const serviceIndex = [
 
 // ---- 1. Amazon Book Marketing
 
-export const coverReelVideo: StyleVideoAsset = {
-  src: coverReel,
-  label: 'A fantasy book cover being designed on a laptop, then shown as a printed hardcover',
-  caption: '',
-  poster: { src: coverReelPoster, width: 720, height: 1280 },
-}
-
 export const marketYourStoryImage: StyleImage = {
   src: story736,
   srcSet: set([story480, 480], [story736, 736]),
@@ -101,16 +106,159 @@ export const marketYourStoryImage: StyleImage = {
   caption: '',
 }
 
-export const amazonCopy = [
-  'Amazon is where many parents and grandparents look for a children’s book, so the book page has to work hard. Shoppers judge a picture book in seconds, from a thumbnail cover, a title and the first lines of the description.',
-  'We review how your book appears in search and on its product page, then improve the parts you control: the cover presentation, the description, the keywords and the categories it is listed in. Where it suits your goals, we also set up and manage Amazon ads.',
+export const amazonIntro = [
+  'For many families, a new picture book is found on Amazon: a parent searching for a bedtime story, a grandparent choosing a birthday gift, a teacher filling a classroom shelf. Each of them decides from a small cover, a title and the few lines they read while scrolling on a phone.',
+  'We help children’s authors make those moments count. We look at how your book is presented on its page, how easily the right shoppers can find it through search and categories, and whether advertising suits it at all, then build a plan around your book, your readers and your budget.',
 ]
-export const amazonPoints = [
-  'Cover review at thumbnail size, where most shoppers first see it',
-  'Descriptions written for the parents and teachers who choose children’s books',
-  'Keyword and category research for your book’s age group and topic',
-  'Amazon ad setup and monitoring, when advertising fits your plan',
+
+export const amazonFocus: { title: string; body: string }[] = [
+  { title: 'Presentation', body: 'A cover, description and A+ Content that show an adult what the book is, who it is for and why a child will enjoy it.' },
+  { title: 'Discoverability', body: 'Keywords and categories that follow how families really search: by age, topic, occasion and reading level.' },
+  { title: 'Advertising approach', body: 'Sponsored ads used deliberately, with an agreed budget and a clear goal, never simply switched on and left running.' },
 ]
+
+export const ecosystemVideo: StyleVideoAsset = {
+  src: ecosystem,
+  label:
+    'Amazon’s smile logo drawn on a cream background, then appearing across its services: a Prime delivery van, grocery produce, Prime signage, an animated sky, a shopping tag, an Alexa+ stage event, a Kindle, and Prime Video and Amazon Music screens',
+  caption: 'Amazon’s own brand animation: one smile across delivery, groceries, devices, music and streaming.',
+  poster: { src: ecosystemPoster, width: 720, height: 900 },
+}
+
+export const campaignIntro =
+  'The animation here follows Amazon’s smile across delivery vans, groceries, devices, music and streaming, a reminder of how much of a family’s shopping and screen time runs through one company. Sponsored ads can place a book inside that flow, in search results and on the pages of related titles. Whether they help depends on how carefully the campaign is run.'
+
+export const campaignSteps: { title: string; body: string }[] = [
+  {
+    title: 'Campaign setup',
+    body: 'We choose the campaign types that fit your book, usually starting with sponsored product ads, and agree a daily budget and goal you are comfortable with. Campaigns are organized by format and audience so the results are easy to read.',
+  },
+  {
+    title: 'Targeting',
+    body: 'Search terms that parents and teachers type, such as an age range, a theme or an occasion, plus comparable children’s titles whose pages your book can appear on. Searches that do not match the book are excluded.',
+  },
+  {
+    title: 'Monitoring',
+    body: 'Impressions, clicks, spend and orders are reviewed on a regular schedule, looking for search terms that use budget without results and those that are quietly working.',
+  },
+  {
+    title: 'Ongoing refinement',
+    body: 'Bids shift toward what performs, weak keywords are paused and new ones tested, and seasonal moments such as back-to-school or the holidays are planned ahead. You receive a plain-language note of what changed and why.',
+  },
+]
+
+export const amazonBoardImage: StyleImage = {
+  src: amazonBoard735,
+  srcSet: set([amazonBoard480, 480], [amazonBoard735, 735]),
+  width: 735,
+  height: 701,
+  alt: 'Illustration headed Amazon Marketing, with Amazon’s smile logo above a team of small figures stacking cardboard boxes marked with icons for analytics, settings, time, ideas and global reach, using a ladder and a lift',
+  caption: '',
+}
+
+export const listingIntro =
+  'Children rarely choose their own books. The page has to reassure the adult who is buying: is it right for this age, will it hold a child’s attention, is it worth the price? We review the listing piece by piece and fix whatever stands in the way.'
+
+export const listingAreas: { title: string; body: string }[] = [
+  {
+    title: 'Listing review',
+    body: 'Title, subtitle, series name, cover thumbnail, age range and the first preview pages, checked together the way a shopper sees them on a small screen.',
+  },
+  {
+    title: 'Descriptions',
+    body: 'A clear opening line, the heart of the story in a few sentences, and the details parents look for: age range, themes and what makes the book a good read-aloud.',
+  },
+  {
+    title: 'Keyword research',
+    body: 'Search terms drawn from how families actually look for books, such as “bedtime story for toddlers” or “picture book about starting school”, placed where Amazon reads them.',
+  },
+  {
+    title: 'Category relevance',
+    body: 'Categories chosen for accuracy as well as visibility, so the book is shown beside titles for the same age group and subject, where the right readers are already browsing.',
+  },
+]
+
+export const aplusIntro = [
+  'A+ Content is the set of designed image panels that sits below the description on an Amazon book page. Instead of one block of text, visitors scroll through visuals, which suits children’s books especially well: the artwork is often the strongest reason to buy, and A+ is where it can be shown large.',
+  'Each panel has one job. Together they answer the questions a parent or teacher would otherwise have to guess at before deciding.',
+]
+
+export const aplusModules: { title: string; body: string }[] = [
+  { title: 'Visual panels', body: 'Large artwork, interior spreads and character art that show the book’s style and quality at a glance.' },
+  { title: 'Book highlights', body: 'The essentials made visible: age range, format and trim size, what a child will learn or enjoy, and how the pages are organized.' },
+  { title: 'Author information', body: 'A short introduction to the author or illustrator, with a portrait, so families know who made the book.' },
+  { title: 'Comparisons', body: 'Series and companion titles side by side, so readers can see how the books relate and where to start.' },
+]
+
+export const aplusSamplesIntro =
+  'The five panels below come from one A+ set for a how-to-draw book series. Each is shown whole, as it appears on the book page. For a picture book, the same panels might feature a favorite spread, introduce the main characters, state the age range and themes, and set out the series in reading order.'
+
+const aplusImage = (src640: string, src970: string, alt: string): StyleImage => ({
+  src: src970,
+  srcSet: set([src640, 640], [src970, 970]),
+  width: 970,
+  height: 600,
+  alt,
+  caption: '',
+})
+
+export type AplusSample = { kind: string; title: string; body: string; image: StyleImage }
+
+export const aplusSamples: AplusSample[] = [
+  {
+    kind: 'Visual panel',
+    title: 'From sketch to finished character',
+    body: 'Four small frames trace one illustration from rough construction lines to clean line art and flat color, beside the finished, fully painted character. Before reading a word, a visitor sees what the book teaches and the standard it builds toward.',
+    image: aplusImage(
+      aplus1x640,
+      aplus1x970,
+      'A+ panel: four small frames showing one anime-style schoolgirl drawing at successive stages, rough sketch, refined pencil, clean line art and flat color, beside a large finished full-color version of the same character under cherry blossoms',
+    ),
+  },
+  {
+    kind: 'Book highlights',
+    title: 'Inside the pages',
+    body: 'Open spreads show the real interior layout, labeled with the method’s three stages: Analyzing, Sketching and Finishing. Two banners state the practical facts a buyer would otherwise ask about: step-by-step instructions, and a 7.5 × 9.25 inch trim size chosen for comfortable holding.',
+    image: aplusImage(
+      aplus2x640,
+      aplus2x970,
+      'A+ panel: two open interior spreads of step-by-step drawing exercises labeled Analyzing, Sketching and Finishing, with banners reading Step-by-step instructions for easier visualizing the process, and Smaller size 7.5 x 9.25 inches for better holding and reading experience',
+    ),
+  },
+  {
+    kind: 'Comparison',
+    title: 'Two books, one series',
+    body: 'Both titles stand side by side under a banner that introduces the series: a 30-day drawing guide for beginners and teachers, and a follow-on book about stylizing characters. Shoppers can see how the books relate and choose the right starting point.',
+    image: aplusImage(
+      aplus3x640,
+      aplus3x970,
+      'A+ panel: two hardcover books on a desk, How to Draw and Think Like a True Artist, a 30-day drawing guide for beginners and teachers, and How to Draw and Think: Stylizing Characters, under a banner reading New efficient way to learn with How to Draw and Think series',
+    ),
+  },
+  {
+    kind: 'Book highlights',
+    title: 'What the lessons cover',
+    body: 'Two stacked bands preview the progression inside: first the fundamentals of the human figure, with a proportion diagram and a short note on body structure, then a deliberately exaggerated pose with a tip on pushing it further. The panel shows that the book moves from rules to personal style.',
+    image: aplusImage(
+      aplus4x640,
+      aplus4x970,
+      'A+ panel in two bands: Learn the basics of drawing human figure, with a classical proportion diagram and a note that an adult body is typically 7 to 8 heads tall; and And learn how to break the rules to make more stylized characters, with a hunched, long-armed mannequin pose and a tip on exaggerating posture',
+    ),
+  },
+  {
+    kind: 'Key features',
+    title: 'The contents at a glance',
+    body: 'The cover of the second book sits beside a short list of what it covers: anatomy and shape language, cartoon, anime and semi-realistic drawing, and mixing styles. Readable in seconds, it confirms the book’s scope for a visitor who is close to deciding.',
+    image: aplusImage(
+      aplus5x640,
+      aplus5x970,
+      'A+ panel: the cover of How to Draw and Think: Stylizing Characters beside a list reading Basic anatomy and shape language, Drawing cartoon, Drawing anime, Drawing semi-realistic, Mixing styles, under the heading Learn to draw and think like a true master',
+    ),
+  },
+]
+
+export const amazonTrademarkNote =
+  'Amazon, Kindle, A+ Content and the Amazon logo are trademarks of Amazon.com, Inc. or its affiliates. We are an independent service and are not affiliated with, endorsed by or sponsored by Amazon. Amazon alone decides search placement and rankings, so no result is guaranteed.'
 
 // ---- 2. Book Launch Campaigns (no matching asset: text-led)
 
@@ -187,7 +335,7 @@ const socialSlide = (name: string, alt: string): StyleImage => ({
 
 export const socialCopy = [
   'Parents, teachers and librarians share book recommendations every day on social media. We help you take part in those conversations with a consistent presence and posts people want to save and share.',
-  'The nine slides below come from one complete sample case study for a retail brand. Read in order, they show the stages of the work we deliver: understanding the brand and its problem, planning and producing the ad creative, then reporting on what happened and what it means.',
+  'The nine slides below come from one complete sample case study for a children’s book brand. Read in order, they show the stages of the work we deliver: understanding the brand and its problem, planning and producing the ad creative, then reporting on what happened and what it means.',
 ]
 
 export type SocialStage = { title: string; deliverable: string; body: string; next?: string; image: StyleImage }
@@ -201,23 +349,23 @@ export const socialPhases: SocialPhase[] = [
       {
         title: 'Case study overview',
         deliverable: 'Cover slide',
-        body: 'The cover frames the whole story in one line: how strategic ad creative helped an e-commerce brand, with the headline result stated up front.',
+        body: 'The cover frames the whole story in one line: how strategic ad creative helped a children’s book brand sell online, with the headline result stated up front.',
         next: 'Next, it introduces the client.',
-        image: socialSlide('01-case-study', 'Cover slide in a beige folder: Current Client Case Study, 4.5x ROAS, how strategic ad creative helped generate a 4.5x return on ad spend for an e-commerce brand'),
+        image: socialSlide('01-case-study', 'Cover slide in a beige folder with a picture-book cover clipped to it: Current Client Case Study, 4.5x ROAS, how strategic ad creative helped generate a 4.5x return on ad spend for an e-commerce brand'),
       },
       {
         title: 'The client',
         deliverable: 'Client and goal brief',
-        body: 'A retail brand with strong products and a clear audience, whose social media was not yet working as a sales channel. The goal: strengthen how the brand shows up online and create ads that move people closer to buying.',
+        body: 'A children’s book brand with strong books and a clear audience of families, whose social media was not yet working as a sales channel. The goal: strengthen how the brand shows up online and create ads that move readers closer to buying.',
         next: 'With the goal set, the next step is to pin down the problem.',
-        image: socialSlide('02-client', 'Slide headed The Client, retail industry: a retail e-commerce brand that struggled to make social media a real sales channel, with two photographs of people in streetwear'),
+        image: socialSlide('02-client', 'Slide headed The Client, retail industry: a retail e-commerce brand that struggled to make social media a real sales channel, with two illustrated children’s book covers clipped below the text'),
       },
       {
         title: 'The problem',
         deliverable: 'Content audit',
-        body: 'The audit found content too similar to competitors, not enough of it, and product presentation that needed to feel more intentional. The slide sums it up: the content was not distinct enough in a crowded category.',
+        body: 'The audit found content too similar to other children’s book brands, not enough of it, and book presentation that needed to feel more intentional. The slide sums it up: the content was not distinct enough in a crowded category.',
         next: 'The problem shapes the creative approach.',
-        image: socialSlide('03-problem', 'Slide headed The Problem: the brand’s social presence did not match the quality of its products and the content felt too similar to competitors, above a grid of circles with one filled in'),
+        image: socialSlide('03-problem', 'Slide headed The Problem, with a children’s book cover pinned beside the title: the brand’s social presence did not match the quality of its products and the content felt too similar to competitors, above a grid of circles with one filled in'),
       },
     ],
   },
@@ -228,23 +376,23 @@ export const socialPhases: SocialPhase[] = [
       {
         title: 'Our approach',
         deliverable: 'Creative strategy',
-        body: 'Instagram ad creative designed to make the products feel desirable, styled and easy to shop. Instead of plain product posts, the visuals show the pieces in context, as part of a lifestyle, with a clear path to purchase.',
+        body: 'Instagram ad creative designed to make the books feel desirable, inviting and easy to buy. Instead of plain cover posts, the visuals show the books in context, as part of family reading time, with a clear path to purchase.',
         next: 'The strategy is then turned into finished ads.',
-        image: socialSlide('04-approach', 'Slide headed Our Approach: Instagram ad creative designed to make products feel more desirable, styled and easy to shop, with three small ad images'),
+        image: socialSlide('04-approach', 'Slide headed Our Approach: Instagram ad creative designed to make products feel more desirable, styled and easy to shop, with three children’s book covers as ad examples'),
       },
       {
         title: 'What made the ads work',
         deliverable: 'Ad creative',
-        body: 'The finished ads were built around more than the product: clear, desirable visuals that stop the scroll and give people enough confidence to click through. Three ad examples sit at the foot of the slide.',
+        body: 'The finished ads were built around more than the cover: clear, desirable visuals that stop the scroll and give parents enough confidence to click through. Three ad examples sit at the foot of the slide.',
         next: 'The ads then run as a campaign.',
-        image: socialSlide('05-ads-work', 'Slide headed What Made the Ads Work: creative that made the clothing feel clear, desirable and easy to act on, with three ad images'),
+        image: socialSlide('05-ads-work', 'Slide headed What Made the Ads Work: creative that made the books feel clear, desirable and easy to act on, with activity-book and children’s book covers and a bar chart of 2x, 3.5x and a 4.5x client result'),
       },
       {
         title: 'Campaign snapshot',
         deliverable: 'Campaign summary',
         body: 'The campaign at a glance: purchase-focused Instagram ads run over the first 90 days, with the spend, tracked sales and return stated plainly on one page.',
         next: 'The results are then put in context.',
-        image: socialSlide('06-snapshot', 'Slide headed Campaign Snapshot: purchase-focused Instagram ads over 90 days, $2.7K ad spend, $12.1K tracked sales, 4.5x return on ad spend, above a billboard of three T-shirts'),
+        image: socialSlide('06-snapshot', 'Slide headed Campaign Snapshot: purchase-focused Instagram ads over 90 days, $2.7K ad spend, $12.1K tracked sales, 4.5x return on ad spend, above three children’s book covers and a Shop Now button'),
       },
     ],
   },
@@ -257,27 +405,27 @@ export const socialPhases: SocialPhase[] = [
         deliverable: 'Benchmark comparison',
         body: 'A result means more next to a yardstick. This slide compares the campaign’s return with common e-commerce and Meta ad benchmarks in a simple bar chart.',
         next: 'Next comes the detail behind the headline.',
-        image: socialSlide('07-result', 'Slide headed Why This Result Matters, comparing the campaign’s 4.5x return on ad spend with common 2x to 3x benchmarks in a bar chart'),
+        image: socialSlide('07-result', 'Slide headed Why This Result Matters, with a stack of children’s books, comparing the campaign’s 4.5x return on ad spend with common 2x to 3x benchmarks in a bar chart'),
       },
       {
         title: 'The business impact',
         deliverable: 'Campaign reporting summary',
         body: 'What the campaign meant for the business, backed by per-ad metric cards: views, reach, engagement, purchases, cost per purchase, placements, duration and spend, labeled as an internal reporting summary.',
         next: 'Finally, the takeaway for future content.',
-        image: socialSlide('08-impact', 'Slide headed The Business Impact, with five pinned cards of per-ad metrics such as views, purchases, reach, engagement and spend, marked internal campaign reporting summary'),
+        image: socialSlide('08-impact', 'Slide headed The Business Impact: the campaign drove the client’s strongest sales period since launching, above a row of five children’s book covers and a bar chart showing the 4.5x result against common benchmarks'),
       },
       {
         title: 'Your creative should be working harder',
         deliverable: 'Key takeaway',
         body: 'The closing message: social creative should build desire, strengthen perception and give people a reason to act. When strategy and visuals line up, content becomes a sales driver, which is where the next campaign begins.',
-        image: socialSlide('09-creative', 'Slide headed Your Creative Should Be Working Harder, with photographs pinned around the text'),
+        image: socialSlide('09-creative', 'Slide headed Your Creative Should Be Working Harder, with children’s book covers pinned beside the title and arranged in a row above a bar chart'),
       },
     ],
   },
 ]
 
 export const socialNote =
-  'These slides are a sample case study for a retail clothing brand, shown to illustrate the format and stages of the work. The figures on them belong to that sample; they are not results we promise or a forecast for your book.'
+  'These slides are a sample case study for a children’s book brand, shown to illustrate the format and stages of the work. The figures on them belong to that sample; they are not results we promise or a forecast for your book.'
 export const socialPoints = ['Platform choice based on where your readers are', 'Monthly content calendar', 'Post, carousel and short-video designs', 'Captions and hashtags written for your audience', 'Community replies and engagement support']
 
 // ---- 5. Book Promotion
@@ -354,29 +502,38 @@ export const websiteCopy = [
   'We design author websites around four things: presenting each book clearly with its cover, description and where to find it; telling your story on an About the Author page; showing news, events and school visits; and a simple menu that gets visitors to what they want in a click or two.',
 ]
 
-export type WebsiteSample = { video: StyleVideoAsset; title: string; body: string }
+/**
+ * `fill` makes a sample cover the shared 16:10 card instead of showing its whole frame, cropping only what lies
+ * outside the card; `position` is the CSS object-position that decides which part is kept.
+ */
+export type WebsiteSample = { video: StyleVideoAsset; title: string; body: string; fill?: { position: string } }
 
 /** The four supplied samples. Descriptions describe only what each video shows. */
 export const websiteSamples: WebsiteSample[] = [
   {
     video: {
       src: site1,
-      label: 'Website sample 1: a bright, minimal layout with one featured item, a large title and a side category menu',
+      label: 'Website sample 1: a scroll through a book-store website, from a hero offering textbooks at the best price past best-seller covers, featured books, an award banner and reader testimonials to the footer',
       caption: '',
-      poster: { src: site1Poster, width: 720, height: 540 },
+      poster: { src: site1Poster, width: 800, height: 600 },
     },
-    title: 'Bright, gallery-style presentation',
-    body: 'One featured item at a time on a clean white backdrop, with a large name beneath it and a short category list at the side. The tour moves from the featured view to a detail page and then to a tidy grid. For an author, the same structure gives each book its own spotlight, a page for its details and a clear overview of the whole series.',
+    // 4:3 in a 16:10 card: keeps source rows 80-580. The site logo and menu (rows 82-109 in the hero shots) and the
+    // footer text (down to row 578 when the page rests at the bottom) both stay inside; above row 80 is grey backdrop.
+    fill: { position: '50% 80%' },
+    title: 'A clean, book-first storefront',
+    body: 'A light, airy book-store site: a hero with a featured cover and a search box, then rows of best-seller and other books with prices, an award banner and reader testimonials before the footer. For an author, the same structure puts every book in front of readers with its cover and price, and lets awards and reviews build trust on the way down the page.',
   },
   {
     video: {
       src: site2,
-      label: 'Website sample 2: a dark layout with a large central image, a bold title, one call-to-action button and thumbnails',
+      label: 'Website sample 2: a book trailer for a placeholder novel cover on a beach at sunset, with review quotes, an open inside page, a price and an Available Now end card',
       caption: '',
-      poster: { src: site2Poster, width: 720, height: 540 },
+      poster: { src: site2Poster, width: 736, height: 414 },
     },
-    title: 'Bold feature page with one clear action',
-    body: 'A dark, dramatic page where a single large image carries the design: a bold title on one side, one clearly marked button, and thumbnails to switch between items. Applied to a new release, the cover takes center stage with a short hook, one obvious next step for readers, and the rest of your books a click away.',
+    // 16:9 in a 16:10 card: trims 37 px from each side, which only ever shows the beach backdrop.
+    fill: { position: '50% 50%' },
+    title: 'A book trailer for your home page',
+    body: 'A short trailer built around one book: the cover turns into view beside the title and author, star-rated review quotes appear, an inside page opens, and it closes on a tagline, the price and an Available Now card. On an author website, a trailer like this greets visitors with the new release and gives them a reason to buy before they scroll.',
   },
   {
     video: {

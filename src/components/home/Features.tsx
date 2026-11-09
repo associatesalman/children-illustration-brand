@@ -52,7 +52,7 @@ export function Features() {
       {hasPendingClaims && (
         <p className="mx-auto mt-14 max-w-2xl text-center text-sm text-ink-soft">
           Items marked &ldquo;pending confirmation&rdquo; come from the reference document. They are not yet verified
-          policies of klutzbookpublisher and must be confirmed before launch.
+          policies of Klutzbookpublishers and must be confirmed before launch.
         </p>
       )}
     </Section>

@@ -266,7 +266,7 @@ function attachmentName(key: string, name: string) {
 const truncate = (text: string, max: number) => (text.length > max ? `${text.slice(0, max - 1)}…` : text)
 
 function emailText(serviceNames: string[], sections: SummarySection[], fileCount: number) {
-  const lines = ['New free sample request from the klutzbookpublisher website', '', 'SELECTED SERVICES', ...serviceNames.map((name) => `- ${name}`)]
+  const lines = ['New free sample request from the Klutzbookpublishers website', '', 'SELECTED SERVICES', ...serviceNames.map((name) => `- ${name}`)]
   for (const section of sections) {
     lines.push('', section.title.toUpperCase())
     if (!section.rows.length) lines.push('(No additional details)')
@@ -300,7 +300,7 @@ function emailHtml(serviceNames: string[], sections: SummarySection[], fileCount
     })
     .join('\n')
   return `<div style="font-family:Arial,Helvetica,sans-serif;font-size:15px;color:#161412;max-width:720px">
-<h1 style="font-size:21px;margin:0 0 12px">New free sample request from the klutzbookpublisher website</h1>
+<h1 style="font-size:21px;margin:0 0 12px">New free sample request from the Klutzbookpublishers website</h1>
 <p style="margin:0 0 6px;font-weight:600">Selected services</p>
 <ul style="margin:0;padding-left:20px;line-height:1.6">${serviceNames.map((name) => `<li>${escapeHtml(name)}</li>`).join('')}</ul>
 ${sectionHtml}

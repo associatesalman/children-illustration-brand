@@ -1,4 +1,4 @@
-import hero1672 from '../assets/publishing/hero-library-1672.webp'
+import hero1671 from '../assets/publishing/hero-library-1671.webp'
 import hero960 from '../assets/publishing/hero-library-960.webp'
 import logoBarnesNoble from '../assets/publishing/logo-barnes-noble.png'
 import logoHoopla from '../assets/publishing/logo-hoopla.png'
@@ -19,11 +19,11 @@ const set = (...pairs: [string, number][]) => pairs.map(([src, w]) => `${src} ${
 // ---------------------------------------------------------------- Hero
 
 export const heroImage: StyleImage = {
-  src: hero1672,
-  srcSet: set([hero960, 960], [hero1672, 1672]),
-  width: 1672,
+  src: hero1671,
+  srcSet: set([hero960, 960], [hero1671, 1671]),
+  width: 1671,
   height: 941,
-  alt: 'A wall of tall wooden bookshelves with a glowing arched doorway in the middle, where a small figure stands reading a book, under the words Klutz, Beyond the page, possibilities',
+  alt: 'A wall of warmly lit wooden bookshelves with children’s book covers displayed among the books and a glowing arched doorway in the middle, where a small child stands reading on a wooden floor, under the words Klutz, Beyond the page, possibilities',
   caption: '',
 }
 
@@ -106,27 +106,27 @@ export const processImage: StyleImage = {
 
 export type ProcessStep = { title: string; body: string; icon: 'submit' | 'check' | 'agree' | 'edit' | 'design' | 'promote' | 'print' | 'review' | 'distribute' }
 
-/** The chart's nine steps, in the order its path runs, each defined from the chart's own text. */
+/** The chart's nine steps, in the order its path runs, described for an author self-publishing with us. */
 export const processSteps: ProcessStep[] = [
   {
     icon: 'submit',
     title: 'Content submission',
-    body: 'The author submits a proposal or query letter, either to a literary agent or directly to a publisher.',
+    body: 'You send your manuscript straight to us and tell us about the book: who it is for, how you picture it and where you want it sold. As a self-publishing author, there is no agent or publisher to pitch first.',
   },
   {
     icon: 'check',
     title: 'Quality check',
-    body: 'If the publisher accepts the script, it joins the set of unsolicited manuscripts that are checked for the quality of their content.',
+    body: 'We read the full manuscript and review the quality of its content, then tell you what it needs before production begins.',
   },
   {
     icon: 'agree',
     title: 'Approval and negotiation',
-    body: 'Commissioning editors negotiate the intellectual property rights and the royalty, and decide the intended formats of publication.',
+    body: 'Together we agree the services, timeline and cost, and you choose the formats your book will be published in. The book, its rights and its earnings stay yours.',
   },
   {
     icon: 'edit',
     title: 'Editing',
-    body: 'The focus is on technical and legal issues and on improving the content through rewriting and editorial changes, the choice of title and headings, and structural changes.',
+    body: 'Our editors improve the content through rewriting and editorial changes, help you settle the title and headings, and make any structural and technical corrections.',
   },
   {
     icon: 'design',
@@ -136,21 +136,21 @@ export const processSteps: ProcessStep[] = [
   {
     icon: 'promote',
     title: 'Sales and marketing',
-    body: 'The front cover images are produced and chapters are edited for promotion, then sales people promote the book.',
+    body: 'We prepare the cover images and sample pages for promotion and help you plan how the book will reach its readers.',
   },
   {
     icon: 'print',
     title: 'Printing and binding',
-    body: 'The printer sends a pre-press proof of the book. Once the proof is approved, printing begins.',
+    body: 'The printer sends a pre-press proof of the book. Once you approve the proof, printing begins.',
   },
   {
     icon: 'review',
     title: 'Pre-release reviews',
-    body: 'The printer often sends some free copies of the book to the publisher, to be used for pre-release reviews.',
+    body: 'Early copies of the finished book can go to reviewers and readers before launch, so it can gather its first reviews.',
   },
   {
     icon: 'distribute',
     title: 'Distribution',
-    body: 'Books are generally sold through booksellers and retailers. Newspapers and magazines can be sold directly to subscribers, and other periodicals through newsagents.',
+    body: 'Your book is made available through online stores, booksellers and retailers, so readers can find and buy it.',
   },
 ]

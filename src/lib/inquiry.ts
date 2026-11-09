@@ -102,8 +102,6 @@ export const fieldLimits: Record<InquiryField, number> = {
   details: 5000,
 }
 
-export const detailsMinLength = 20
-
 const EMAIL = /^[^\s@<>()[\]\\,;:"]+@[^\s@<>()[\]\\,;:".]+(\.[^\s@<>()[\]\\,;:".]+)+$/
 const PHONE = /^\+?[\d\s().-]+$/
 // Control characters (including CR/LF) are never valid in single-line fields.
@@ -150,9 +148,13 @@ export function validateInquiry(input: unknown): { values: InquiryValues; errors
 
   if (tooLong('country')) errors.country = `Please keep the country under ${fieldLimits.country} characters.`
 
+  // Only full name and email are required. Every other field is optional, but when it is filled in it must be valid.
   const specificOptions = serviceCatalog[values.mainService]
-  if (!specificOptions) {
-    errors.mainService = 'Please choose the service you need most.'
+  if (!values.mainService) {
+    // A specific service only belongs to a main service, so it is dropped when no main service is chosen.
+    values.specificService = ''
+  } else if (!specificOptions) {
+    errors.mainService = 'Please choose an option from the list.'
     values.specificService = ''
   } else if (values.specificService && !specificOptions.includes(values.specificService)) {
     errors.specificService = 'Please choose an option from the list.'
@@ -162,10 +164,7 @@ export function validateInquiry(input: unknown): { values: InquiryValues; errors
     errors.projectStage = 'Please choose an option from the list.'
   }
 
-  if (!values.details) errors.details = 'Please tell us a little about your book.'
-  else if (values.details.length < detailsMinLength) {
-    errors.details = `Please add a little more detail (at least ${detailsMinLength} characters).`
-  } else if (tooLong('details')) errors.details = `Please keep the details under ${fieldLimits.details} characters.`
+  if (tooLong('details')) errors.details = `Please keep the details under ${fieldLimits.details} characters.`
 
   return { values, errors }
 }

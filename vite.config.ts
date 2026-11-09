@@ -64,8 +64,22 @@ function siteUrlTags(siteUrl: string): Plugin {
 export default defineConfig(({ mode }) => {
   // Server-only settings from .env for the dev/preview API. Only VITE_ variables ever reach the browser,
   // so the recipient address and SMTP credentials stay out of the bundle.
+  //
+  // Vite restarts in the same process when .env changes, so the values copied on the previous load are replaced
+  // each time (a plain `??=` kept the first, possibly empty, value and the API answered 503 until a manual restart).
+  // Variables that were already set in the real environment before the first load still take priority. loadEnv lets
+  // process.env override the files, so the copies from the previous load are removed before .env is read again.
+  const state = globalThis as { __shellEnvNames?: Set<string>; __dotenvNames?: Set<string> }
+  state.__shellEnvNames ??= new Set(Object.keys(process.env).filter((name) => process.env[name] !== undefined))
+  state.__dotenvNames ??= new Set()
+  for (const name of state.__dotenvNames) delete process.env[name]
+  state.__dotenvNames.clear()
   const env = loadEnv(mode, process.cwd(), ['CONTACT_', 'FREE_SAMPLE_', 'SMTP_', 'TRUST_PROXY'])
-  for (const [name, value] of Object.entries(env)) process.env[name] ??= value
+  for (const [name, value] of Object.entries(env)) {
+    if (state.__shellEnvNames.has(name)) continue
+    process.env[name] = value
+    state.__dotenvNames.add(name)
+  }
   const siteUrl = (process.env.VITE_SITE_URL ?? loadEnv(mode, process.cwd(), 'VITE_').VITE_SITE_URL ?? '').trim().replace(/\/+$/, '')
 
   return {

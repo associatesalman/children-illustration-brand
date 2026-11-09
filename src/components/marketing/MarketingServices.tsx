@@ -1,20 +1,30 @@
 import { ArrowDown, ArrowRight } from 'lucide-react'
-import { Fragment } from 'react'
+import { Fragment, type ReactNode } from 'react'
 import {
   advertisingCopy,
   advertisingImage,
   advertisingTypes,
-  amazonCopy,
-  amazonPoints,
+  amazonBoardImage,
+  amazonFocus,
+  amazonIntro,
+  amazonTrademarkNote,
+  aplusIntro,
+  aplusModules,
+  aplusSamples,
+  aplusSamplesIntro,
   brandBoardImage,
   brandingCopy,
   brandingPoints,
   brandReelVideo,
   contentCopy,
   contentPoints,
-  coverReelVideo,
+  campaignIntro,
+  campaignSteps,
+  ecosystemVideo,
   illustratedPageImage,
   launchCopy,
+  listingAreas,
+  listingIntro,
   launchStages,
   marketYourStoryImage,
   promotionCopy,
@@ -67,29 +77,141 @@ export function ServicesOverviewSection() {
   )
 }
 
-/** 1. White: copy beside the cover-design reel (portrait) and the "Market your story" poster. */
+/** Eyebrow and display subheading for the four blocks inside the Amazon section. */
+function AmazonBlockHeading({ eyebrow, children }: { eyebrow: string; children: ReactNode }) {
+  return (
+    <>
+      <p className="text-sm font-bold tracking-[0.08em] text-brand-red-dark uppercase">{eyebrow}</p>
+      <h3 className="text-display mt-3 text-[clamp(1.8rem,1.3rem+1.6vw,2.75rem)] leading-[1.08] tracking-[-0.015em] text-balance">{children}</h3>
+    </>
+  )
+}
+
+const pad = (n: number) => String(n).padStart(2, '0')
+
+/**
+ * 1. White, in four blocks: the introduction beside the "Market your story" poster; Amazon's brand animation
+ * beside the four campaign-management steps (yellow panel); the listing copy beside the Amazon Marketing
+ * board; and the five A+ Content panels, each shown whole beside what it demonstrates (yellow panel).
+ */
 export function AmazonServiceSection() {
   return (
     <Section id={amazon.id} labelledBy={titleId(amazon.id)}>
+      {/* Introduction */}
       <div className="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:items-center lg:gap-16">
-        <div className="lg:col-span-5">
+        <div className="lg:col-span-7">
           <ServiceHeading id={titleId(amazon.id)} number={1}>
             {amazon.title}
           </ServiceHeading>
-          <Paragraphs items={amazonCopy} />
-          <ListLabel>What we offer</ListLabel>
-          <PointList items={amazonPoints} />
-          <p className="mt-8">
+          <Paragraphs items={amazonIntro} />
+          <dl className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-3">
+            {amazonFocus.map((item) => (
+              <div key={item.title} className="border-t-2 border-ink pt-4">
+                <dt className="text-lg font-bold">{item.title}</dt>
+                <dd className="mt-1.5 leading-relaxed text-ink-soft">{item.body}</dd>
+              </div>
+            ))}
+          </dl>
+          <p className="mt-9">
             <a href="#amazon-detail" className="inline-flex items-center gap-2 font-bold underline underline-offset-4">
               See the full Amazon service <ArrowRight aria-hidden size={17} />
             </a>
           </p>
         </div>
-        <div className="grid grid-cols-2 items-center gap-4 sm:gap-6 lg:col-span-7">
-          <StyleVideo video={coverReelVideo} className="w-full" />
-          <MediaImage image={marketYourStoryImage} sizes="(min-width: 1024px) 26vw, 46vw" className="rounded-lg" />
+        <MediaImage
+          image={marketYourStoryImage}
+          sizes="(min-width: 1024px) 34vw, (min-width: 640px) 28rem, 100vw"
+          className="mx-auto max-w-md rounded-lg lg:col-span-5 lg:max-w-none"
+        />
+      </div>
+
+      {/* Advertising: the brand animation beside the four management steps */}
+      <div className="-mx-5 mt-20 bg-sun px-5 py-10 sm:mx-0 sm:rounded-lg sm:p-10 lg:mt-28 lg:p-14">
+        <div className="grid grid-cols-1 gap-10 lg:grid-cols-12 lg:items-center lg:gap-14">
+          <figure className="mx-auto w-full max-w-sm lg:col-span-5 lg:max-w-none">
+            <StyleVideo video={ecosystemVideo} className="w-full" />
+            <figcaption className="mt-3 text-sm leading-relaxed">{ecosystemVideo.caption}</figcaption>
+          </figure>
+          <div className="lg:col-span-7">
+            <AmazonBlockHeading eyebrow="Amazon advertising">Campaigns that are set up, watched and refined</AmazonBlockHeading>
+            <p className="mt-5 text-lg leading-relaxed">{campaignIntro}</p>
+            <ol className="mt-8 grid grid-cols-1 gap-x-8 gap-y-7 sm:grid-cols-2">
+              {campaignSteps.map((step, index) => (
+                <li key={step.title} className="border-t-2 border-ink pt-4">
+                  <p className="text-display text-lg text-brand-red-dark">{pad(index + 1)}</p>
+                  <h4 className="mt-1 text-xl font-bold">{step.title}</h4>
+                  <p className="mt-1.5 leading-relaxed">{step.body}</p>
+                </li>
+              ))}
+            </ol>
+          </div>
         </div>
       </div>
+
+      {/* Listing and discoverability beside the Amazon Marketing board */}
+      <div className="mt-20 grid grid-cols-1 gap-12 lg:mt-28 lg:grid-cols-12 lg:items-center lg:gap-16">
+        <div className="lg:col-span-7">
+          <AmazonBlockHeading eyebrow="Listing and discoverability">
+            A book page built for the adults who choose children’s books
+          </AmazonBlockHeading>
+          <p className="mt-5 max-w-2xl text-lg leading-relaxed">{listingIntro}</p>
+          <ul className="mt-8 grid grid-cols-1 gap-x-8 gap-y-7 sm:grid-cols-2">
+            {listingAreas.map((area) => (
+              <li key={area.title} className="border-t-2 border-ink pt-4">
+                <h4 className="text-xl font-bold">{area.title}</h4>
+                <p className="mt-1.5 leading-relaxed text-ink-soft">{area.body}</p>
+              </li>
+            ))}
+          </ul>
+        </div>
+        <MediaImage
+          image={amazonBoardImage}
+          sizes="(min-width: 1024px) 36vw, (min-width: 640px) 32rem, 100vw"
+          className="mx-auto max-w-lg lg:col-span-5 lg:max-w-none"
+        />
+      </div>
+
+      {/* A+ Content: what it is, the four kinds of panel, then the five samples shown whole */}
+      <div className="-mx-5 mt-20 bg-sun px-5 py-10 sm:mx-0 sm:rounded-lg sm:p-10 lg:mt-28 lg:p-14">
+        <div className="grid grid-cols-1 gap-10 lg:grid-cols-12 lg:gap-14">
+          <div className="lg:col-span-6">
+            <AmazonBlockHeading eyebrow="Amazon A+ Content">The illustrated part of your book page</AmazonBlockHeading>
+            {aplusIntro.map((text) => (
+              <p key={text.slice(0, 32)} className="mt-5 text-lg leading-relaxed">
+                {text}
+              </p>
+            ))}
+          </div>
+          <ul className="grid grid-cols-1 content-start gap-4 sm:grid-cols-2 lg:col-span-6">
+            {aplusModules.map((module) => (
+              <li key={module.title} className="rounded-lg bg-white p-6">
+                <h4 className="text-lg font-bold">{module.title}</h4>
+                <p className="mt-1.5 leading-relaxed text-ink-soft">{module.body}</p>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <p className="mt-14 max-w-3xl border-l-4 border-ink pl-5 text-lg leading-relaxed">{aplusSamplesIntro}</p>
+        <ol aria-label="A+ Content samples" className="mt-10 grid gap-12 lg:gap-14">
+          {aplusSamples.map((sample, index) => (
+            <li key={sample.title} className="grid grid-cols-1 gap-6 lg:grid-cols-12 lg:items-center lg:gap-10">
+              <div className="rounded-lg bg-white p-1.5 sm:p-3 lg:col-span-8">
+                <MediaImage image={sample.image} sizes="(min-width: 1280px) 800px, (min-width: 1024px) 56vw, 92vw" className="rounded" />
+              </div>
+              <div className="lg:col-span-4">
+                <p className="text-sm font-bold tracking-[0.08em] text-brand-red-dark uppercase">
+                  {pad(index + 1)} · {sample.kind}
+                </p>
+                <h4 className="text-display mt-2 text-[1.65rem] leading-tight">{sample.title}</h4>
+                <p className="mt-3 leading-relaxed">{sample.body}</p>
+              </div>
+            </li>
+          ))}
+        </ol>
+      </div>
+
+      <p className="mt-12 max-w-3xl text-sm leading-relaxed text-ink-soft">{amazonTrademarkNote}</p>
     </Section>
   )
 }
@@ -316,6 +438,9 @@ export function ContentServiceSection() {
   )
 }
 
+/** One frame for all four website samples (they range from 4:3 to 16:9). Samples marked `fill` cover it; the rest are shown whole. */
+const sampleFrame = { aspectRatio: '16 / 10' }
+
 /**
  * 8. Yellow: author websites. The four supplied samples in two rows of two (stacked on mobile), each with
  * its description beneath, then how our approach differs from a template. Shared playback keeps at most two
@@ -338,7 +463,13 @@ export function WebsiteServiceSection() {
       <ul aria-label="Website samples" className="mt-14 grid grid-cols-1 gap-x-8 gap-y-14 md:grid-cols-2 lg:mt-16 lg:gap-x-10 lg:gap-y-16">
         {websiteSamples.map((sample, index) => (
           <li key={sample.video.src}>
-            <StyleVideo video={sample.video} className="w-full shadow-[0_1px_0_rgba(0,0,0,0.08)]" />
+            <StyleVideo
+              video={sample.video}
+              contain={!sample.fill}
+              objectPosition={sample.fill?.position}
+              style={sampleFrame}
+              className="w-full shadow-[0_1px_0_rgba(0,0,0,0.08)]"
+            />
             <p className="mt-6 text-sm font-bold tracking-[0.08em] text-brand-red-dark uppercase">Sample {index + 1}</p>
             <h3 className="mt-2 text-2xl font-bold">{sample.title}</h3>
             <p className="mt-3 max-w-[40rem] text-lg leading-relaxed">{sample.body}</p>

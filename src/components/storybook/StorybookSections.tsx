@@ -88,7 +88,7 @@ export function FullPageSection() {
   )
 }
 
-/** 02 · The flowing spread shown wide and whole, the craft in two columns, then the video beside the closing notes. */
+/** 02 · The flowing spread shown whole, the portrait video beside the craft notes, then the cover-to-cover video. */
 export function SpreadSection() {
   const [path, text, gutter, whole] = spreadPoints
   return (
@@ -98,32 +98,34 @@ export function SpreadSection() {
         <Lead className="mx-auto mt-6">{spreads.lead}</Lead>
       </div>
 
-      {/* Shown whole at its own landscape proportions: never cropped to fit a column. */}
-      <PageImage image={spreadMedia.yarn} className="mx-auto mt-14 w-full max-w-[920px] lg:mt-20" />
+      {/* Shown whole at its own landscape proportions, never cropped, and never wider than the supplied 735px file so it
+          is not upscaled (and softened) on wide screens. */}
+      <PageImage image={spreadMedia.yarn} className="mx-auto mt-14 w-full max-w-[735px] lg:mt-20" />
 
-      <div className="mt-16 grid grid-cols-1 gap-x-16 gap-y-10 md:grid-cols-2 lg:mt-20">
-        {[path, text, gutter].map((point) => (
-          <div key={point.title} className={point === gutter ? 'md:col-span-2 md:max-w-3xl' : ''}>
-            <SubHeading>{point.title}</SubHeading>
-            <p className="mt-3 max-w-xl text-lg leading-relaxed text-ink-soft md:max-w-none">{point.body}</p>
+      {/* The tall portrait (9:16) video sits beside all four craft notes, so the text column is about as tall as the
+          video and no empty band opens up above or below a short block of copy. */}
+      <div className="mt-16 grid grid-cols-1 gap-10 md:grid-cols-12 md:items-center lg:mt-20 lg:gap-16">
+        <VideoFigure video={spreadMedia.video} className="mx-auto w-full max-w-xs md:col-span-5 lg:col-span-4 lg:max-w-sm" />
+        <div className="space-y-9 md:col-span-7 lg:col-span-8">
+          {[path, text, gutter].map((point) => (
+            <div key={point.title}>
+              <SubHeading>{point.title}</SubHeading>
+              <p className="mt-3 max-w-2xl text-lg leading-relaxed text-ink-soft">{point.body}</p>
+            </div>
+          ))}
+          <div>
+            <SubHeading>{whole.title}</SubHeading>
+            <p className="mt-3 max-w-2xl text-lg leading-relaxed">{whole.body}</p>
+            <p className="mt-4 max-w-2xl text-lg leading-relaxed">
+              The video moves through the openings of one square picture book: the characters, the text and the soft
+              background shapes are arranged for each two-page view, not for separate single pages.
+            </p>
           </div>
-        ))}
+        </div>
       </div>
 
       {/* Square video shown whole (the spread sits inside its own backdrop), at up to its native 720px. */}
       <VideoFigure video={spreadMedia.coverToCover} className="mx-auto mt-16 w-full max-w-[720px] lg:mt-24" />
-
-      <div className="mt-16 grid grid-cols-1 gap-10 md:grid-cols-12 md:items-center lg:mt-24 lg:gap-16">
-        <VideoFigure video={spreadMedia.video} className="mx-auto w-full max-w-xs md:col-span-5 lg:col-span-4 lg:max-w-sm" />
-        <div className="md:col-span-7 lg:col-span-8">
-          <SubHeading>{whole.title}</SubHeading>
-          <p className="mt-4 max-w-2xl text-lg leading-relaxed">{whole.body}</p>
-          <p className="mt-4 max-w-2xl text-lg leading-relaxed">
-            The video moves through the openings of one square picture book: the characters, the text and the soft
-            background shapes are arranged for each two-page view, not for separate single pages.
-          </p>
-        </div>
-      </div>
 
       <OfferRow {...spreadOffer} panel="sun" className="mt-16 lg:mt-24" />
     </CategoryShell>

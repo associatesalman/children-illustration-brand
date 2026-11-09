@@ -8,7 +8,7 @@ import { findSheet } from '../content/coloringSheets'
 import { usePageMeta } from '../lib/pageMeta'
 
 const description =
-  'Free online coloring pages from klutzbookpublisher. Choose a drawing, color it in your browser and pick up where you left off. No sign-up needed.'
+  'Free online coloring pages from Klutzbookpublishers. Choose a drawing, color it in your browser and pick up where you left off. No sign-up needed.'
 
 /**
  * Coloring Studio: /coloring-studio shows the library, /coloring-studio?sheet=<id> opens a drawing.

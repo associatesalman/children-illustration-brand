@@ -12,7 +12,7 @@ import { usePageMeta } from '../lib/pageMeta'
 export function AboutPage() {
   usePageMeta(
     'About Us',
-    "klutzbookpublisher is an illustration studio for children's authors in the US and UK, with editing, publishing, and marketing support from one coordinated team.",
+    "Klutzbookpublishers is an illustration studio for children's authors in the US and UK, with editing, publishing, and marketing support from one coordinated team.",
   )
 
   return (

@@ -25,7 +25,7 @@ export function sendJson(res: ServerResponse, result: Result) {
 export const missingEnv = (names: readonly string[]) => names.filter((name) => !process.env[name]?.trim())
 
 export function sender() {
-  return { name: process.env.CONTACT_FROM_NAME?.trim() || 'klutzbookpublisher website', address: process.env.CONTACT_FROM_EMAIL!.trim() }
+  return { name: process.env.CONTACT_FROM_NAME?.trim() || 'Klutzbookpublishers website', address: process.env.CONTACT_FROM_EMAIL!.trim() }
 }
 
 /** True only when the provider accepted the message for the recipient and rejected no one. */

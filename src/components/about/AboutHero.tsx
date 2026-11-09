@@ -1,4 +1,3 @@
-import { brand } from '../../content/site'
 import { ButtonLink } from '../ui/Button'
 import { Container } from '../ui/Container'
 import { Accent, Eyebrow } from '../ui/Section'
@@ -9,7 +8,7 @@ export function AboutHero() {
     <section aria-labelledby="about-hero-title" className="border-b border-ink/10 bg-white">
       <Container className="py-20 text-center sm:py-24 lg:py-32">
         <div className="mx-auto max-w-[54rem]">
-          <Eyebrow>About {brand.name}</Eyebrow>
+          <Eyebrow>About Klutz</Eyebrow>
           <h1
             id="about-hero-title"
             className="text-display text-[clamp(2.75rem,1.5rem+4.6vw,6rem)] leading-[1] tracking-[-0.01em]"
@@ -18,7 +17,7 @@ export function AboutHero() {
           </h1>
           <span aria-hidden className="mx-auto mt-8 block h-1 w-16 rounded-full bg-sun" />
           <p className="mx-auto mt-8 max-w-[42rem] text-lg leading-relaxed text-ink-soft sm:text-xl">
-            {brand.name} is an illustration studio for children&rsquo;s authors in the United States and the United
+            KLUTZ is an illustration studio for children&rsquo;s authors in the United States and the United
             Kingdom. We draw the characters and pages at the heart of your book, then help you publish and promote it,
             so one team carries your story from manuscript to bookshelf.
           </p>

@@ -9,6 +9,10 @@ type StyleVideoProps = {
   bare?: boolean
   /** Above the fold: load the poster immediately instead of lazily. */
   priority?: boolean
+  /** Show the whole frame (object-fit: contain) instead of filling the box, for boxes of a shared size. */
+  contain?: boolean
+  /** CSS object-position for the poster and video, e.g. "50% 80%" to choose which part a filled box keeps. */
+  objectPosition?: string
   style?: CSSProperties
 }
 
@@ -17,10 +21,11 @@ type StyleVideoProps = {
  * frame; the video sits on top and becomes visible once it is actually playing. Playback is managed
  * in videoPlayback.ts. The only control is a pause/play button that appears on keyboard focus.
  */
-export function StyleVideo({ video, className = '', bare = false, priority = false, style }: StyleVideoProps) {
+export function StyleVideo({ video, className = '', bare = false, priority = false, contain = false, objectPosition, style }: StyleVideoProps) {
   const ref = useRef<HTMLVideoElement>(null)
   const [playing, setPlaying] = useState(false)
   const { poster } = video
+  const fit = contain ? 'object-contain' : 'object-cover'
 
   useEffect(() => {
     const element = ref.current
@@ -41,7 +46,8 @@ export function StyleVideo({ video, className = '', bare = false, priority = fal
         loading={priority ? 'eager' : 'lazy'}
         fetchPriority={priority ? 'high' : undefined}
         decoding="async"
-        className="absolute inset-0 h-full w-full object-cover"
+        className={`absolute inset-0 h-full w-full ${fit}`}
+        style={objectPosition ? { objectPosition } : undefined}
       />
       <video
         ref={ref}
@@ -54,7 +60,8 @@ export function StyleVideo({ video, className = '', bare = false, priority = fal
         aria-label={video.label}
         width={poster.width}
         height={poster.height}
-        className="invisible absolute inset-0 h-full w-full object-cover data-[started=true]:visible"
+        className={`invisible absolute inset-0 h-full w-full ${fit} data-[started=true]:visible`}
+        style={objectPosition ? { objectPosition } : undefined}
       />
       <button
         type="button"

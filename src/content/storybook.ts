@@ -8,7 +8,7 @@ import heroSpread1159 from '../assets/storybook/hero-meadow-spread-1159.webp'
 import heroSpread640 from '../assets/storybook/hero-meadow-spread-640.webp'
 import bedtimePage from '../assets/storybook/scene-bedtime-page-444.webp'
 import byTheWater from '../assets/storybook/scene-by-the-water-717.webp'
-import yarnToWater from '../assets/storybook/spread-yarn-to-water-736.webp'
+import lionAndPeacock from '../assets/storybook/spread-lion-and-peacock-735.webp'
 import coverToCover from '../assets/storybook/spreads-cover-to-cover.mp4'
 import coverToCoverPoster from '../assets/storybook/spreads-cover-to-cover-poster-720.webp'
 import forestFriend from '../assets/storybook/spreads-forest-friend.mp4'
@@ -128,11 +128,11 @@ export const spreads: CategoryCopy = {
 
 export const spreadMedia: { yarn: StyleImage; video: StyleVideoAsset; coverToCover: StyleVideoAsset } = {
   yarn: {
-    src: yarnToWater,
-    width: 736,
-    height: 506,
-    alt: 'A two-page spread: a woman knitting in a chair on the left, her knitting turning into a stream of weedy water that crosses the fold and ends with a snorkeling boy swimming on the right',
-    caption: 'One line carries the reader across both pages: the knitting becomes water, passes the fold and ends with the swimmer on the right.',
+    src: lionAndPeacock,
+    width: 735,
+    height: 557,
+    alt: 'An open picture book showing one watercolor scene across both pages: birds fly through a blue sky above a lion’s mane on the left, and on the right a smiling lion cub stands beneath a tree beside a peacock, with the story text set in the open sky on each page',
+    caption: 'One scene runs across both pages: the sky and the tree carry the eye over the fold from the birds and the lion on the left to the lion cub and the peacock on the right.',
   },
   video: {
     src: forestFriend,

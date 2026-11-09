@@ -55,7 +55,7 @@ export function ColoringSection() {
         </div>
       </div>
 
-      <div className="mt-16 grid grid-cols-1 gap-12 md:grid-cols-2 lg:mt-24 lg:grid-cols-12 lg:items-center lg:gap-12">
+      <div className="mt-14 grid grid-cols-1 gap-12 md:grid-cols-2 lg:mt-16 lg:grid-cols-12 lg:items-start lg:gap-12">
         <VideoFigure video={coloringMedia.video} className="mx-auto w-full max-w-sm lg:col-span-3" />
         <div className="md:order-last md:col-span-2 lg:order-none lg:col-span-4">
           <SubHeading>{coloringTheme.title}</SubHeading>

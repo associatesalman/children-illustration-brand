@@ -1,4 +1,8 @@
 import type { StyleVideoAsset } from './illustrationStyles'
+import cutoutRig400 from '../assets/animation/2d-cutout-rig-400.webp'
+import cutoutRig531 from '../assets/animation/2d-cutout-rig-531.webp'
+import parkScene from '../assets/animation/3d-park-scene.mp4'
+import parkScenePoster from '../assets/animation/3d-park-scene-poster.webp'
 import process480 from '../assets/animation/3d-process-steps-480.webp'
 import process736 from '../assets/animation/3d-process-steps-736.webp'
 import sketchToRender from '../assets/animation/sketch-to-render.mp4'
@@ -11,13 +15,7 @@ import stageSketch480 from '../assets/animation/stage-sketch-480.webp'
 import stageSketch720 from '../assets/animation/stage-sketch-720.webp'
 import storyScenes from '../assets/animation/story-scenes.mp4'
 import storyScenesPoster from '../assets/animation/story-scenes-poster.webp'
-// Animated clips already on the site (Character Design and Illustration Styles pages), reused here.
-import expressions3d from '../assets/character-design/expressions-3d.mp4'
-import expressions3dPoster from '../assets/character-design/expressions-3d-poster-736.webp'
-import walk3d from '../assets/style-services/3d-walk.mp4'
-import walk3dPoster from '../assets/style-services/3d-walk-poster-720.webp'
-import turnaround from '../assets/style-services/cartoon-turnaround.mp4'
-import turnaroundPoster from '../assets/style-services/cartoon-turnaround-poster-720.webp'
+// Every image and video on this page is used only here; none is shared with another page.
 
 export type AnimationImage = { src: string; srcSet: string; width: number; height: number; alt: string }
 export type Capability = { title: string; body: string }
@@ -91,12 +89,39 @@ export const approaches: { name: string; summary: string; suits: string[] }[] = 
 
 /* ------------------------------------------------------------------- 2D */
 
-export const turnaroundVideo: StyleVideoAsset = {
-  src: turnaround,
-  label: 'A flat-colored 2D character turning in place, shown from the front, side and back.',
-  caption: 'A 2D character turnaround: the same design drawn from every angle so it stays on model in motion.',
-  poster: { src: turnaroundPoster, width: 720, height: 900 },
+export const cutoutRigImage: AnimationImage = {
+  src: cutoutRig531,
+  srcSet: `${cutoutRig400} 400w, ${cutoutRig531} 531w`,
+  width: 531,
+  height: 626,
+  alt: 'The same flat 2D boy shown twice. On the left he is split into separate pieces: head and hair, neck, white shirt with dark sleeves, forearms, hands, dark denim shorts, legs, striped socks and red sneakers. On the right the pieces are assembled into one standing pose, hands on hips.',
 }
+
+export const cutoutRigCaption = 'A flat 2D character as a cut-out rig: the separate pieces on the left, the assembled pose on the right.'
+
+export const cutoutRigIntro = [
+  'The boy shown here is drawn once and then cut into the parts an animator moves. This is a cut-out, or puppet, rig: one of the two main ways of animating a 2D character, alongside drawing every frame by hand.',
+  'Each piece turns around its own pivot, at the shoulder, elbow, wrist, hip or knee, so a pose is built by rotating and placing parts rather than redrawing the whole figure.',
+]
+
+export const cutoutRigPoints: Capability[] = [
+  {
+    title: 'Drawn once, in pieces',
+    body: 'Head and hair, neck, shirt, sleeves, forearms, hands, shorts, legs, socks and sneakers are separate shapes, so each one can move without the rest being redrawn.',
+  },
+  {
+    title: 'Joints that stay closed',
+    body: 'Pieces such as the neck run on beneath the parts that overlap them, so a tilting head or a swinging arm never opens a gap at the joint.',
+  },
+  {
+    title: 'On model in every frame',
+    body: 'Because the artwork itself does not change, line weight, proportions and color stay identical from shot to shot, which suits longer videos and recurring characters.',
+  },
+  {
+    title: 'Mixed with drawn frames',
+    body: 'Some moves are beyond a rig, such as a full head turn or a big squash and stretch. For those, animators swap in hand-drawn pieces, so many 2D projects combine both methods.',
+  },
+]
 
 export const twoDParagraphs = [
   '2D animation brings an illustrated character to life through movement, timing and expression. Because it is built from drawings, it can match a book’s artwork closely, from loose pencil and watercolor washes to bold vector shapes.',
@@ -113,8 +138,8 @@ export const twoDCapabilities: Capability[] = [
     body: 'Characters moving through a setting together, with entrances, exits and simple camera moves that keep the story readable.',
   },
   {
-    title: 'Frame-by-frame and rigged approaches',
-    body: 'Hand-drawn frames for fluid, expressive motion, or a cut-out rig of separate parts for efficient, consistent movement. Many projects mix both.',
+    title: 'Frame-by-frame animation',
+    body: 'Every pose drawn by hand for the most fluid, expressive movement, used for big actions, effects and moments a rig cannot reach.',
   },
   {
     title: 'Illustrated backgrounds',
@@ -166,23 +191,39 @@ export const threeDCapabilities: Capability[] = [
 
 /* ------------------------------------------------------------ Character */
 
-export const expressionsVideo: StyleVideoAsset = {
-  src: expressions3d,
-  label: 'A 3D boy cycling through expressions: curious, angry, surprised, calm and amused.',
-  caption: 'Facial range: one 3D character moving between curiosity, anger, surprise and a sly smile.',
-  poster: { src: expressions3dPoster, width: 736, height: 414 },
-}
-
-export const walkVideo: StyleVideoAsset = {
-  src: walk3d,
-  label: 'A stylized character in a long blue coat walking in a loop against an orange sky.',
-  caption: 'A walk cycle: posture, rhythm and stride tell you who the character is before they speak.',
-  poster: { src: walk3dPoster, width: 720, height: 1280 },
+export const parkSceneVideo: StyleVideoAsset = {
+  src: parkScene,
+  label: 'A short 3D-rendered scene in a sunny park: a boy sits alone under a tree, close-ups show a red-haired girl looking sad and the boy looking worried and then determined, he crosses the park, and the two children end up smiling over a sheet of paper on a bench.',
+  caption: 'A 15-second 3D scene with no dialogue: the story is carried entirely by staging, faces and one decisive gesture.',
+  poster: { src: parkScenePoster, width: 736, height: 414 },
 }
 
 export const characterParagraphs = [
-  'Children read characters through their faces and bodies long before they follow the plot. Character animation is where personality becomes visible: the speed of a blink, the shape of a shrug, the way one character bounces while another trudges.',
-  'Consistency matters as much as expression. A character’s proportions, posture and habits should feel the same in every scene, so young viewers recognize them instantly and trust what they see.',
+  'Children read characters through their faces and bodies long before they follow the plot. In this short 3D scene nobody speaks: who sits apart, where the eyes go and how an expression changes tell the whole story.',
+  'Every beat is staged to be read once, quickly. Close-ups isolate a feeling, wide shots show who is alone and who is not, and the camera follows a character the moment he decides to act. The same acting principles apply whether a character is rendered in 3D or drawn in 2D.',
+]
+
+export const sceneBeats: Capability[] = [
+  {
+    title: 'Set the scene',
+    body: 'A wide shot under the trees. The boy sits apart while other children gather around a grown-up by a bench, so before anyone moves the viewer already knows who is on the outside.',
+  },
+  {
+    title: 'Show the feeling',
+    body: 'Tight close-ups on the girl’s lowered eyes and the boy’s worried brow. Holding the camera close gives young viewers time to read each emotion.',
+  },
+  {
+    title: 'Turn the moment',
+    body: 'His brow drops and his hand closes into a fist: worry becomes determination, shown with a face and one simple gesture instead of words.',
+  },
+  {
+    title: 'Move the story on',
+    body: 'He gets up and walks across the park with the camera behind his shoulder, so the audience travels with him.',
+  },
+  {
+    title: 'Land the ending',
+    body: 'The scene closes on a bench, the two children leaning over a sheet of paper and smiling: a warm, clear resolution.',
+  },
 ]
 
 export const characterCapabilities: Capability[] = [
@@ -197,9 +238,9 @@ export const characterCapabilities: Capability[] = [
 
 export const storyVideo: StyleVideoAsset = {
   src: storyScenes,
-  label: 'Rendered 3D story scenes of a family: a girl reading in a forest, a tent going up, the family toasting marshmallows at a campfire, a bike ride, and a father and daughter cheering at home.',
+  label: 'Rendered 3D story scenes of a family camping trip: two girls reading a map, a tent going up, the family toasting marshmallows at a campfire at night, and a bike ride through the trees.',
   caption:
-    'Rendered 3D story scenes: a family camping trip, a bike ride and a celebration at home, with each shot built around one clear action or feeling.',
+    'Rendered 3D story scenes from a family camping trip: a map, a tent, a campfire and a bike ride, each shot built around one clear action or feeling.',
   poster: { src: storyScenesPoster, width: 720, height: 432 },
 }
 

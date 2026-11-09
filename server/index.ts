@@ -89,4 +89,4 @@ function send(res: ServerResponse, status: number, message: string) {
   res.end(message)
 }
 
-server.listen(port, () => console.log(`klutzbookpublisher running on http://localhost:${port}`))
+server.listen(port, () => console.log(`Klutzbookpublishers running on http://localhost:${port}`))

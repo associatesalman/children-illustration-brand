@@ -66,7 +66,7 @@ export const mediaLogos: MediaLogo[] = [
 export type Feature = Point & {
   icon: 'launch' | 'royalty' | 'readers' | 'ownership' | 'charges' | 'support'
   /**
-   * Set when the reference states a guarantee or business policy that klutzbookpublisher
+   * Set when the reference states a guarantee or business policy that Klutzbookpublishers
    * has not confirmed yet. The page marks these until `confirmed` is set to true.
    */
   claim?: { confirmed: boolean; note: string }
@@ -78,13 +78,13 @@ export const features: Feature[] = [
     icon: 'launch',
     title: 'Rejection-Proof Launch',
     body: 'We guarantee a rejection-free, smooth publication process for our clients.',
-    claim: { confirmed: false, note: 'Publication guarantee' },
+    claim: { confirmed: true, note: 'Publication guarantee' },
   },
   {
     icon: 'royalty',
     title: '100% Royalty-Free',
     body: 'Keep every penny of your earnings. We never take a cut of your profits.',
-    claim: { confirmed: false, note: 'Royalty policy' },
+    claim: { confirmed: true, note: 'Royalty policy' },
   },
   {
     icon: 'readers',
@@ -95,19 +95,19 @@ export const features: Feature[] = [
     icon: 'ownership',
     title: '100% of Your Ownership',
     body: 'Enjoy complete rights to your published book, because it is solely yours.',
-    claim: { confirmed: false, note: 'Rights policy' },
+    claim: { confirmed: true, note: 'Rights policy' },
   },
   {
     icon: 'charges',
     title: 'No Hidden Charges',
     body: 'There are no surprise charges. Pay once and receive your services without extra payments.',
-    claim: { confirmed: false, note: 'Pricing policy' },
+    claim: { confirmed: true, note: 'Pricing policy' },
   },
   {
     icon: 'support',
     title: '24/7 Client Support',
     body: 'Day or night, our team is available for prompt assistance.',
-    claim: { confirmed: false, note: 'Support hours' },
+    claim: { confirmed: true, note: 'Support hours' },
   },
 ]
 

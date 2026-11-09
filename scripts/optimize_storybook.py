@@ -74,7 +74,7 @@ webp(yoyo.crop((14, 33, 731, 427)), 'background-interior', widths=(717,), q=88)
 webp(yoyo.crop((123, 914, 622, 1188)), 'background-village', widths=(499,), q=88)
 
 # ---------------------------------------------------------------- spreads
-webp(open_rgb('double page spreads -2.jpg'), 'spread-yarn-to-water', widths=(736,), q=88)
+webp(open_rgb('double page spreads -2.jpg'), 'spread-lion-and-peacock', widths=(735,), q=88)
 
 with tempfile.TemporaryDirectory() as tmp:
     tmp = Path(tmp)

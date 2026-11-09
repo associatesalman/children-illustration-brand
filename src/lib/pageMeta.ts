@@ -8,7 +8,7 @@ import { brand } from '../content/site'
  */
 export const siteUrl = String(import.meta.env.VITE_SITE_URL ?? '').trim().replace(/\/+$/, '')
 
-/** Title template shared by every page: "<Page> | klutzbookpublisher". */
+/** Title template shared by every page: "<Page> | Klutzbookpublishers". */
 export const pageTitle = (name: string) => `${name} | ${brand.name}`
 
 function setMeta(attr: 'name' | 'property', key: string, content: string) {

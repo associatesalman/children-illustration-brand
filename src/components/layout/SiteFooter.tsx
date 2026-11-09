@@ -1,5 +1,5 @@
-import { Mail } from 'lucide-react'
-import { brand, primaryNav, serviceLinks, supportEmail, type NavLink } from '../../content/site'
+import { Mail, MapPin } from 'lucide-react'
+import { brand, officeAddress, primaryNav, serviceLinks, supportEmail, type NavLink } from '../../content/site'
 import { Container } from '../ui/Container'
 import { Logo } from '../ui/Logo'
 
@@ -31,6 +31,21 @@ export function SiteFooter() {
             <a href={`mailto:${supportEmail}`} className={`mt-1 inline-flex items-start gap-2 text-[0.95rem] font-medium [overflow-wrap:anywhere] ${linkClass}`}>
               <Mail aria-hidden size={18} className="mt-1 shrink-0" />
               {supportEmail}
+            </a>
+            <p className="mt-5 text-sm font-semibold">Office</p>
+            <a
+              href={officeAddress.mapUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={`${officeAddress.text} (opens Google Maps in a new tab)`}
+              className={`mt-1 inline-flex items-start gap-2 text-[0.95rem] font-medium ${linkClass}`}
+            >
+              <MapPin aria-hidden size={18} className="mt-1 shrink-0" />
+              <span>
+                {officeAddress.lines[0]}
+                <br />
+                {officeAddress.lines[1]}
+              </span>
             </a>
           </address>
           <p className="mt-6 leading-relaxed">

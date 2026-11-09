@@ -5,8 +5,8 @@ Usage: python scripts/optimize_publishing.py <project root>
 The supplied files are never modified. Output goes to src/assets/publishing/.
 
 Sources:
-- public/book publication and distribution/hero mokcup.png: the hero (a library wall with a lit doorway).
-  Shown whole; only resized.
+- public/book publication and distribution/hero mokcup.png: the hero (a library wall with a lit doorway,
+  replaced on 2026-11-06 with a 1671x941 version that shows children's book covers on the shelves). Only resized.
 - public/book publication and distribution/process mockup.png: the nine-step publishing chart. Shown whole
   and kept large and sharp so its labels stay legible.
 - public/about-mockups/mockup3 illustratiion.jpg: a printed picture book, cover and two spreads, used
@@ -42,7 +42,7 @@ def webp(im, name, widths, q=84):
     print(name, written)
 
 
-webp(Image.open(src / 'hero mokcup.png').convert('RGB'), 'hero-library', (960, 1672), q=82)
+webp(Image.open(src / 'hero mokcup.png').convert('RGB'), 'hero-library', (960, 1671), q=82)
 webp(Image.open(src / 'process mockup.png').convert('RGB'), 'process-chart', (640, 941), q=90)
 # Introduction section: a printed picture book (cover and two open spreads) on white. The last 4 px are a
 # grey border line on the right edge of the white backdrop; trimming them lets the image sit seamlessly on white.

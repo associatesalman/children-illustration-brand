@@ -18,10 +18,15 @@ import {
   developmentTopics,
   educationCapabilities,
   educationParagraphs,
-  expressionsVideo,
+  cutoutRigCaption,
+  cutoutRigImage,
+  cutoutRigIntro,
+  cutoutRigPoints,
   introParagraphs,
   introVideo,
+  parkSceneVideo,
   processImage,
+  sceneBeats,
   soundGroups,
   soundIntro,
   stages,
@@ -32,10 +37,8 @@ import {
   threeDParagraphs,
   trailerBeats,
   trailerParagraphs,
-  turnaroundVideo,
   twoDCapabilities,
   twoDParagraphs,
-  walkVideo,
 } from '../../content/animation'
 import { Section } from '../ui/Section'
 import { AnimationHeading, AnimationPicture, Paragraphs, VideoFigure } from './AnimationParts'
@@ -78,19 +81,36 @@ export function AnimationIntroSection() {
   )
 }
 
-/** Yellow: the 2D turnaround beside the copy, then five capability cards. */
+/** Yellow: the copy, then the cut-out rig beside how a rig works, then five capability cards. */
 export function TwoDSection() {
   return (
     <Section id="2d-animation" tone="sun" labelledBy="2d-animation-title">
-      <div className="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:items-center lg:gap-16">
-        <VideoFigure video={turnaroundVideo} className="mx-auto w-full max-w-[26rem] lg:col-span-5 lg:max-w-none" />
+      <div className="grid grid-cols-1 gap-8 lg:grid-cols-12 lg:gap-16">
+        <AnimationHeading id="2d-animation-title" eyebrow="2D animation" eyebrowClassName="text-brand-red-dark" className="lg:col-span-6">
+          Illustrations that <em className="text-brand-red-dark italic">come to life</em>
+        </AnimationHeading>
+        <Paragraphs items={twoDParagraphs} className="lg:col-span-6 lg:pt-10" />
+      </div>
+
+      <div className="mt-14 grid grid-cols-1 gap-12 lg:mt-16 lg:grid-cols-12 lg:items-start lg:gap-16">
+        <figure className="mx-auto w-full max-w-[26rem] lg:col-span-5 lg:max-w-none">
+          <AnimationPicture image={cutoutRigImage} sizes="(min-width: 1024px) 36vw, 26rem" className="rounded-lg bg-white" />
+          <figcaption className="mt-4 text-sm leading-relaxed text-ink-soft">{cutoutRigCaption}</figcaption>
+        </figure>
         <div className="lg:col-span-7">
-          <AnimationHeading id="2d-animation-title" eyebrow="2D animation" eyebrowClassName="text-brand-red-dark">
-            Illustrations that <em className="text-brand-red-dark italic">come to life</em>
-          </AnimationHeading>
-          <Paragraphs items={twoDParagraphs} className="mt-8 max-w-2xl" />
+          <h3 className="text-display text-[1.9rem] leading-tight">How a cut-out rig works</h3>
+          <Paragraphs items={cutoutRigIntro} className="mt-6 max-w-2xl" />
+          <ul className="mt-10 grid grid-cols-1 gap-x-10 gap-y-7 sm:grid-cols-2">
+            {cutoutRigPoints.map((item) => (
+              <li key={item.title} className="border-t-2 border-ink pt-4">
+                <h4 className="text-xl font-bold">{item.title}</h4>
+                <p className="mt-1.5 leading-relaxed">{item.body}</p>
+              </li>
+            ))}
+          </ul>
         </div>
       </div>
+
       <ul className="mt-16 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:mt-20 lg:grid-cols-6">
         {twoDCapabilities.map((item, index) => (
           <li key={item.title} className={`rounded-lg bg-white p-7 ${index < 2 ? 'lg:col-span-3' : 'lg:col-span-2'}`}>
@@ -136,7 +156,7 @@ export function ThreeDSection() {
   )
 }
 
-/** Yellow: the walk cycle beside the expressions video, with the five character qualities underneath. */
+/** Yellow: the 3D park scene beside its five story beats, with the five character qualities underneath. */
 export function CharacterSection() {
   return (
     <Section id="character-animation" tone="sun" labelledBy="character-animation-title">
@@ -152,20 +172,33 @@ export function CharacterSection() {
         <Paragraphs items={characterParagraphs} className="lg:col-span-6 lg:pt-10" />
       </div>
 
-      <div className="mt-14 grid grid-cols-1 gap-10 sm:grid-cols-12 lg:mt-16 lg:gap-12">
-        <VideoFigure video={walkVideo} className="mx-auto w-full max-w-[20rem] sm:col-span-5 sm:max-w-none lg:col-span-4" />
-        <div className="sm:col-span-7 lg:col-span-8">
-          <VideoFigure video={expressionsVideo} />
-          <ul className="mt-10 grid grid-cols-1 gap-x-10 gap-y-7 lg:grid-cols-2">
-            {characterCapabilities.map((item) => (
-              <li key={item.title} className="border-t-2 border-ink pt-4">
-                <h3 className="text-xl font-bold">{item.title}</h3>
-                <p className="mt-1.5 leading-relaxed">{item.body}</p>
+      <div className="mt-14 grid grid-cols-1 gap-12 lg:mt-16 lg:grid-cols-12 lg:items-start lg:gap-16">
+        <VideoFigure video={parkSceneVideo} className="lg:col-span-7" />
+        <div className="lg:col-span-5">
+          <h3 className="text-sm font-bold tracking-[0.08em] uppercase">The scene, beat by beat</h3>
+          <ol className="mt-6 grid gap-6">
+            {sceneBeats.map((beat, index) => (
+              <li key={beat.title} className="grid grid-cols-[2.5rem_minmax(0,1fr)] gap-x-4">
+                <span className="text-display flex size-10 items-center justify-center rounded-full bg-ink text-base text-white">{index + 1}</span>
+                <div>
+                  <h4 className="text-lg font-bold">{beat.title}</h4>
+                  <p className="mt-1 leading-relaxed">{beat.body}</p>
+                </div>
               </li>
             ))}
-          </ul>
+          </ol>
         </div>
       </div>
+
+      <h3 className="text-display mt-16 text-[1.9rem] leading-tight lg:mt-20">What character animation covers</h3>
+      <ul className="mt-8 grid grid-cols-1 gap-x-10 gap-y-7 sm:grid-cols-2 lg:grid-cols-3">
+        {characterCapabilities.map((item) => (
+          <li key={item.title} className="border-t-2 border-ink pt-4">
+            <h4 className="text-xl font-bold">{item.title}</h4>
+            <p className="mt-1.5 leading-relaxed">{item.body}</p>
+          </li>
+        ))}
+      </ul>
     </Section>
   )
 }

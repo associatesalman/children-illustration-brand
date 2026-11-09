@@ -12,7 +12,7 @@ import { usePageMeta } from '../lib/pageMeta'
 export function PortfolioPage() {
   usePageMeta(
     'Portfolio',
-    "Sample children's book illustration from klutzbookpublisher: storybook spreads and board-book mockups, page planning sketches, character sheets, illustration styles, activity book pages, and children's book covers by category.",
+    "Sample children's book illustration from Klutzbookpublishers: storybook spreads and board-book mockups, page planning sketches, character sheets, illustration styles, activity book pages, and children's book covers by category.",
   )
 
   return (

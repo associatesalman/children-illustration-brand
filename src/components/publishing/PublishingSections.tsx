@@ -194,7 +194,7 @@ export function ProcessSection() {
             The publishing process, <Accent>step by step</Accent>
           </>
         }
-        intro="How a book travels from manuscript to reader. The chart follows a single path through nine steps, and each one is explained here in the same order."
+        intro="How your self-published book travels from manuscript to reader with us. The chart follows a single path through nine steps, and each one is explained here in the same order."
       />
 
       <div className="mt-14 grid grid-cols-1 gap-12 lg:mt-16 lg:grid-cols-12 lg:items-start lg:gap-16">

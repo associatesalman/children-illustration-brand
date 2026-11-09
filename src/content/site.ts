@@ -1,11 +1,19 @@
 export const brand = {
-  name: 'klutzbookpublisher',
+  name: 'Klutzbookpublishers',
   description:
     "Children's book illustration for authors in the US and UK, with publishing and marketing support from one team.",
 }
 
 /** Public support address shown on the site. Form submissions go to the private inbox set on the server, not here. */
 export const supportEmail = 'support@klutzbookpublishers.com'
+
+/** Office address shown in the footer and on the Contact page; the link opens Google Maps in a new tab. */
+const addressText = '447 Broadway, 2nd Floor, New York, NY 10013'
+export const officeAddress = {
+  lines: ['447 Broadway, 2nd Floor', 'New York, NY 10013'],
+  text: addressText,
+  mapUrl: `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(addressText)}`,
+}
 
 export type NavLink = {
   label: string

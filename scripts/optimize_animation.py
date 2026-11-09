@@ -16,10 +16,24 @@ Everything in public/2d & 3d animation/ is left unchanged. Output goes to src/as
 
 From the video, only the family scenes are used; the rental-booking ad and the end card are not:
 - sketch-to-render.mp4: all three bands, 0-14 s (camping scenes), 540x960, no audio.
-- story-scenes.mp4: the rendered band only, 14-40.5 s (tent, campfire, bike ride, home), 720x432.
+- story-scenes.mp4: the rendered band only, 14-27.5 s (map reading, tent, campfire, bike ride), 720x432.
+  It stops before the home scenes so that the moment used for the stills below never appears twice on the
+  site, and so the watermark (strongest over the rendered band at about 31-33 s) is left out.
 - stage-sketch / stage-layout / stage-render: one still per band of the same moment (father and daughter
   cheering, 28-32 s), each cropped to 2:1 so the watermark, the "YOUT" label and a logo fragment at the
   bottom of the middle band stay out of frame. The three bands are taken from instants where each is clean.
+
+Added later:
+- 2d and 3d animation smaples.jpg (532x640): one flat 2D vector boy shown twice, as a cut-out rig of
+  separate pieces (head, neck, shirt, sleeves, forearms, hands, shorts, legs, socks, sneakers) beside the
+  assembled character. Saved as 2d-cutout-rig-*.webp.
+- 2d and 3d story videos.mp4 (736x414, 15 s, with audio): a short 3D-rendered story scene in a park. A boy
+  sits alone under a tree, close-ups show a girl's sad face and the boy's worry turning to determination,
+  he crosses the park, and the two end up smiling over a sheet of paper on a bench. Saved without audio as
+  3d-park-scene.mp4, with a poster from the closing bench shot.
+Not used: "2d and 3d video new.mp4" (1280x720, 60 s) is footage from a commercially released animated
+feature film (recognizable characters and scenes) with a marketplace watermark, not studio work, so it
+cannot be shown as a sample.
 
 The available ffmpeg build only has hardware/MediaFoundation H.264 encoders, so h264_mf at a fixed
 bitrate is used.
@@ -52,6 +66,7 @@ def run(*args):
 
 
 webp(Image.open(src / '3d animation process steps.jpg').convert('RGB'), '3d-process-steps', (480, 736), q=86)
+webp(Image.open(src / '2d and 3d animation smaples.jpg').convert('RGB'), '2d-cutout-rig', (400, 532), q=88)
 
 with tempfile.TemporaryDirectory() as tmp:
     tmp = Path(tmp)
@@ -73,10 +88,16 @@ with tempfile.TemporaryDirectory() as tmp:
     Image.open(tmp / 'p1.png').convert('RGB').save(out / 'sketch-to-render-poster.webp', 'WEBP', quality=78, method=6)
 
     story = out / 'story-scenes.mp4'
-    run('-ss', 14, '-to', 40.5, '-i', VIDEO, '-an', '-vf', 'crop=720:432:0:847,format=yuv420p',
+    run('-ss', 14, '-to', 27.5, '-i', VIDEO, '-an', '-vf', 'crop=720:432:0:847,format=yuv420p',
         '-c:v', 'h264_mf', '-b:v', '900k', '-movflags', '+faststart', story)
     run('-ss', 8, '-i', story, '-frames:v', 1, tmp / 'p2.png')
     Image.open(tmp / 'p2.png').convert('RGB').save(out / 'story-scenes-poster.webp', 'WEBP', quality=80, method=6)
 
     for v in (triptych, story):
         print(v.name, v.stat().st_size)
+
+    park = out / '3d-park-scene.mp4'
+    run('-i', src / '2d and 3d story videos.mp4', '-an', '-vf', 'format=yuv420p',
+        '-c:v', 'h264_mf', '-b:v', '1100k', '-movflags', '+faststart', park)
+    run('-ss', 13.5, '-i', park, '-frames:v', 1, tmp / 'p3.png')
+    Image.open(tmp / 'p3.png').convert('RGB').save(out / '3d-park-scene-poster.webp', 'WEBP', quality=80, method=6)

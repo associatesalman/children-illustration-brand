@@ -3,8 +3,9 @@ import { validateInquiry, type InquiryValues } from '../src/lib/inquiry.ts'
 import { acceptedBy, clientIp, createLogger, createRateLimiter, escapeHtml, missingEnv, type Result, sender, sendJson, SMTP_ENV, transport } from './mail.ts'
 
 /**
- * POST /api/contact: validates an inquiry and emails it to the internal
- * recipient over SMTP. Everything here runs on the server; the recipient
+ * POST /api/contact: validates an inquiry (only full name and email are
+ * required) and emails it to the internal recipient over SMTP, From the
+ * configured sender with the visitor's address as Reply-To. Everything here runs on the server; the recipient
  * address and SMTP credentials come from environment variables and never
  * reach the browser.
  *
@@ -75,7 +76,7 @@ async function processRequest(req: IncomingMessage): Promise<Result> {
       from: sender(),
       to: recipient,
       replyTo: { name: values.fullName, address: values.email },
-      subject: `New inquiry: ${values.mainService} from ${values.fullName}`,
+      subject: values.mainService ? `New inquiry: ${values.mainService} from ${values.fullName}` : `New inquiry from ${values.fullName}`,
       text: emailText(values),
       html: emailHtml(values),
     })
@@ -93,24 +94,26 @@ async function processRequest(req: IncomingMessage): Promise<Result> {
 
 // ------------------------------------------------------------------ email
 
-const rows = (v: InquiryValues): [string, string][] => [
-  ['Full name', v.fullName],
-  ['Email address', v.email],
-  ['Phone number', v.phone || 'Not provided'],
-  ['Country', v.country || 'Not provided'],
-  ['Main service', v.mainService],
-  ['Specific service', v.specificService || 'Not specified'],
-  ['Project stage', v.projectStage || 'Not specified'],
-]
+/** Name and email are always present; the optional answers are listed only when the visitor gave them. */
+const rows = (v: InquiryValues): [string, string][] =>
+  (
+    [
+      ['Full name', v.fullName],
+      ['Email address', v.email],
+      ['Phone number', v.phone],
+      ['Country', v.country],
+      ['Main service', v.mainService],
+      ['Specific service', v.specificService],
+      ['Project stage', v.projectStage],
+    ] as [string, string][]
+  ).filter(([, value]) => value)
 
 function emailText(v: InquiryValues) {
   return [
-    'New inquiry from the klutzbookpublisher contact page',
+    'New inquiry from the Klutzbookpublishers contact page',
     '',
     ...rows(v).map(([label, value]) => `${label}: ${value}`),
-    '',
-    'Project details:',
-    v.details,
+    ...(v.details ? ['', 'Project details:', v.details] : []),
     '',
     `Submitted: ${new Date().toUTCString()}`,
     'Reply to this email to answer the visitor directly.',
@@ -123,10 +126,14 @@ function emailHtml(v: InquiryValues) {
     .map(([label, value]) => `<tr><th style="${cell};width:160px;color:#4d4741">${escapeHtml(label)}</th><td style="${cell}">${escapeHtml(value)}</td></tr>`)
     .join('')
   return `<div style="font-family:Arial,Helvetica,sans-serif;font-size:15px;color:#161412;max-width:640px">
-<h1 style="font-size:20px;margin:0 0 16px">New inquiry from the klutzbookpublisher contact page</h1>
-<table style="border-collapse:collapse;width:100%">${table}</table>
+<h1 style="font-size:20px;margin:0 0 16px">New inquiry from the Klutzbookpublishers contact page</h1>
+<table style="border-collapse:collapse;width:100%">${table}</table>${
+    v.details
+      ? `
 <h2 style="font-size:16px;margin:24px 0 8px">Project details</h2>
-<p style="white-space:pre-wrap;margin:0;line-height:1.5">${escapeHtml(v.details)}</p>
+<p style="white-space:pre-wrap;margin:0;line-height:1.5">${escapeHtml(v.details)}</p>`
+      : ''
+  }
 <p style="margin:24px 0 0;color:#4d4741;font-size:13px">Submitted ${escapeHtml(new Date().toUTCString())}. Reply to this email to answer the visitor directly.</p>
 </div>`
 }

@@ -2,7 +2,7 @@ import { EXPORT_SIZES, PRINT_SIZES, renderPng, type ComposeInput } from './compo
 
 /** PNG downloads and printing. Both build a fresh image from the artwork data and never change the artwork. */
 
-export const pngFilename = (sheetId: string) => `klutzbookpublisher-${sheetId}-coloring.png`
+export const pngFilename = (sheetId: string) => `klutzbookpublishers-${sheetId}-coloring.png`
 
 export type DownloadResult = { filename: string; width: number; height: number; reduced: boolean }
 

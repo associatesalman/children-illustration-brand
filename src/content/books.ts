@@ -4,7 +4,9 @@
  *
  * The folder holds 60 files: 58 unique covers once a byte-identical copy and a
  * resized duplicate are removed. "The Owner & the Wife", an adult novel, is
- * left out, so 57 books are listed: 30 on Portfolio and 27 on Home, none on both.
+ * left out, as are three adult titles removed from Home (a parenting guide and two
+ * adult language-learning readers), so 54 books are listed: 30 on Portfolio and
+ * 24 on Home, none on both.
  * Titles are copied from the covers; descriptions only describe what each cover
  * shows or states, with English glosses for non-English titles.
  */
@@ -77,7 +79,7 @@ export type Book = {
 /** Category order on each page. */
 export const collectionCategories: Record<BookCollection, BookCategory[]> = {
   portfolio: ['classics', 'animals', 'faith', 'older', 'humor', 'learning', 'activity', 'languages'],
-  home: ['confidence', 'values', 'classics', 'older', 'curious', 'learning', 'activity', 'languages'],
+  home: ['confidence', 'values', 'classics', 'older', 'curious', 'learning', 'activity'],
 }
 
 export const books: Book[] = [
@@ -529,17 +531,6 @@ export const books: Book[] = [
     width: 404,
     height: 522,
   },
-  {
-    slug: 'raising-children-street-smart',
-    title: 'The Ultimate Guide to Raising Children Street-Smart',
-    category: 'values',
-    collection: 'home',
-    description:
-      '201 lessons and real-life situations to help kids stay aware and make smarter decisions, written for parents, teachers and caregivers. Four children fly a propeller plane over a cartoon globe.',
-    cover: 'four children flying a propeller plane over a cartoon globe, beside safety checklist icons',
-    width: 297,
-    height: 445,
-  },
 
   // Home: Classics & Fairy Tales
   {
@@ -713,30 +704,6 @@ export const books: Book[] = [
       'Unlike the neon Viral Meme Edition, this cover uses surreal painted panels: a shark in sneakers, a crocodile fused with a plane, a tree with an elephant’s head and a cat inside a watermelon.',
     cover: 'surreal painted panels of a shark in sneakers, a crocodile plane and a watermelon cat',
     width: 322,
-    height: 445,
-  },
-
-  // Home: Languages & Bilingual
-  {
-    slug: 'italian-short-stories-for-beginners',
-    title: 'Italian Short Stories for Beginners',
-    category: 'languages',
-    collection: 'home',
-    description:
-      'Book 1, with over 100 dialogues and everyday phrases. Two figures in traditional dress stand beneath a bold title in the green, white and red of the Italian flag.',
-    cover: 'two figures in traditional dress beneath a green, white and red title',
-    width: 279,
-    height: 445,
-  },
-  {
-    slug: 'learn-french-with-short-stories',
-    title: 'Learn French with Short Stories',
-    category: 'languages',
-    collection: 'home',
-    description:
-      'Fifteen beginner stories with parallel French and English text. A flat-style Paris skyline, with the Eiffel Tower and the Arc de Triomphe, rises out of an open book.',
-    cover: 'the Eiffel Tower and Arc de Triomphe rising from an open book',
-    width: 297,
     height: 445,
   },
 ]
