@@ -1,6 +1,7 @@
 /**
  * Copyright & Human Authorship notice. The wording is taken verbatim from the supplied notice (public/copyright.png);
- * only the layout is new. Full-bleed dark band with its own gutters rather than the shared page container.
+ * only the layout is new: a plain, left-aligned informational section (heading, notice bar, source sidebar,
+ * numbered legal points). On mobile the source panel drops below the legal points.
  */
 
 const legalPoints = [
@@ -10,67 +11,77 @@ const legalPoints = [
   'In some cases, a work containing AI-generated material will also contain sufficient human authorship to support a copyright claim. In such cases, copyright will only protect the human-authored aspects of the work.',
 ]
 
-/** Table cell dividers: stacked on mobile, 2 × 2 from md up. */
-const cellBorders = [
-  '',
-  'border-t md:border-t-0 md:border-l',
-  'border-t',
-  'border-t md:border-l',
-]
-
 export function CopyrightNotice() {
   return (
     <section
       id="copyright"
       tabIndex={-1}
       aria-labelledby="copyright-title"
-      className="on-dark w-full bg-ink py-20 text-white sm:py-24 lg:py-28"
+      className="w-full border-t border-neutral-200 bg-white py-16 font-sans text-ink sm:py-20"
     >
-      <div className="mx-auto w-full max-w-[120rem] px-5 sm:px-8 lg:px-12 xl:px-16 2xl:px-20">
-        <div className="mx-auto max-w-4xl text-center">
-          <p className="mb-5 text-sm font-bold tracking-[0.16em] text-sun uppercase">Copyright Notice</p>
-          <h2
-            id="copyright-title"
-            className="text-display text-[clamp(2.4rem,1.4rem+3.6vw,5rem)] leading-[1.04] text-balance"
-          >
-            The <em className="text-sun italic">Human Authorship</em> Requirement
-          </h2>
-          <p className="mx-auto mt-8 max-w-2xl text-lg leading-relaxed text-pretty text-white/80 sm:text-xl">
+      <div className="mx-auto w-full max-w-[72rem] px-4 sm:px-8">
+        <h2
+          id="copyright-title"
+          className="font-sans text-[2.125rem] leading-tight font-bold sm:text-[2.5rem]"
+        >
+          The Human Authorship Requirement
+        </h2>
+
+        <div
+          role="note"
+          aria-labelledby="copyright-notice-label"
+          className="mt-8 border-l-4 border-amber-500 bg-amber-50 px-5 py-5 sm:px-6"
+        >
+          <p id="copyright-notice-label" className="flex items-center gap-2 text-base font-bold">
+            <svg
+              aria-hidden
+              viewBox="0 0 20 20"
+              className="h-5 w-5 shrink-0 text-amber-600"
+              fill="currentColor"
+            >
+              <path
+                fillRule="evenodd"
+                d="M10 18a8 8 0 1 0 0-16 8 8 0 0 0 0 16Zm.75-11.5a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0ZM9.25 9a.75.75 0 0 1 1.5 0v4.5a.75.75 0 0 1-1.5 0V9Z"
+                clipRule="evenodd"
+              />
+            </svg>
+            Copyright Notice
+          </p>
+          <p className="mt-2 text-base leading-relaxed text-ink-soft sm:text-[1.0625rem]">
             In the Office’s view, it is well-established that copyright can protect only material that is the{' '}
-            <strong className="font-bold text-white underline decoration-sun decoration-[3px] underline-offset-[6px]">
-              product of human creativity.
-            </strong>{' '}
-            Most fundamentally, the term “author,” which is used in both the Constitution and the Copyright Act,
-            excludes non-humans.
+            <strong className="font-semibold text-ink">product of human creativity.</strong> Most fundamentally, the
+            term “author,” which is used in both the Constitution and the Copyright Act, excludes non-humans.
           </p>
         </div>
 
-        <h3 className="mt-16 text-center text-sm font-bold tracking-[0.16em] text-white/60 uppercase lg:mt-20">
-          Key Legal Points
-        </h3>
-        <ol className="mx-auto mt-6 grid max-w-6xl grid-cols-1 overflow-hidden rounded-lg border border-white/25 md:grid-cols-2">
-          {legalPoints.map((point, index) => (
-            <li
-              key={index}
-              className={`flex flex-col items-center border-white/25 px-6 py-10 text-center sm:px-10 lg:px-14 lg:py-12 ${cellBorders[index]}`}
-            >
-              <span aria-hidden className="text-display block text-5xl leading-none text-sun sm:text-6xl">
-                {String(index + 1).padStart(2, '0')}
-              </span>
-              <p className="mt-5 max-w-md text-lg leading-relaxed text-pretty text-white/90">{point}</p>
-            </li>
-          ))}
-        </ol>
+        <div className="mt-12 grid grid-cols-1 gap-10 md:grid-cols-[3fr_7fr] md:gap-12">
+          <div className="min-w-0">
+            <h3 className="font-sans text-2xl font-bold">Key Legal Points</h3>
+            <ol className="mt-4 border-t border-neutral-200">
+              {legalPoints.map((point, index) => (
+                <li key={index} className="flex gap-4 border-b border-neutral-200 py-5">
+                  <span aria-hidden className="w-6 shrink-0 pt-0.5 text-sm font-bold text-ink">
+                    {index + 1}.
+                  </span>
+                  <p className="text-base leading-relaxed text-ink-soft sm:text-[1.0625rem]">{point}</p>
+                </li>
+              ))}
+            </ol>
+          </div>
 
-        <div className="mx-auto mt-14 max-w-4xl text-center lg:mt-16">
-          <p className="text-sm font-bold tracking-[0.16em] text-sun uppercase">Source:</p>
-          <p className="mt-4 text-base leading-[2.1] text-white/90 italic sm:text-lg">
-            <span className="underline decoration-sun/70 decoration-1 underline-offset-[7px]">
-              U.S. Copyright Office, Copyright Registration Guidance: Works Containing Material Generated by Artificial
-              Intelligence (March 10, 2023). Legal basis referenced in the guidance includes Burrow-Giles Lithographic
-              Co. v. Sarony and subsequent federal appellate decisions.
-            </span>
-          </p>
+          <aside aria-label="Source" className="min-w-0 md:order-first">
+            <div className="border border-neutral-300 p-5 sm:p-6">
+              <h3 className="font-sans text-base font-bold">Source</h3>
+              <p className="mt-3 text-base leading-[1.8] text-ink">
+                <span className="underline decoration-neutral-400 decoration-1 underline-offset-4">
+                  U.S. Copyright Office, Copyright Registration Guidance: Works Containing Material Generated by
+                  Artificial Intelligence (March 10, 2023).
+                </span>{' '}
+                Legal basis referenced in the guidance includes Burrow-Giles Lithographic Co. v. Sarony and subsequent
+                federal appellate decisions.
+              </p>
+            </div>
+          </aside>
         </div>
       </div>
     </section>
