@@ -1,6 +1,7 @@
 import { BookShowcase } from '../components/books/BookShowcase'
 import { BookTypes } from '../components/home/BookTypes'
 import { CharacterDesign } from '../components/home/CharacterDesign'
+import { CopyrightNotice } from '../components/home/CopyrightNotice'
 import { ExploreServices } from '../components/home/ExploreServices'
 import { Faq } from '../components/home/Faq'
 import { Features } from '../components/home/Features'
@@ -52,6 +53,7 @@ export function HomePage() {
       <WhyUs />
       <Faq />
       <SampleCta />
+      <CopyrightNotice />
     </>
   )
 }
